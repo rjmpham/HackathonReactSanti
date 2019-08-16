@@ -17,19 +17,58 @@ ol, ul {
   margin-bottom: 10px;
 }
 
+.buildSpace{
+    
+    width: 50%;
+    height: 100%;
+    float: left;
+}
+
+.buildRow {
+    margin-top:5%;
+    margin-left:10%;
+    margin-right:0%;
+    margin-bottom:0%;
+
+    justify-content: space-around;
+    flex-direction: row;
+    height: 30%;
+    width: 100%;
+    text-align: center;
+}
+
+.buildDisplay {
+
+    float: left;
+    text-align: center;
+
+}
+
+.playerRow{
+    height: 35%;
+    width: 100%;
+    text-align: center;
+
+
+
+}
+
+
 .square {
+  flex:1;
+  align-content: space-around;
   background: #fff;
   border: 1px solid #999;
   float: left;
-  font-size: 24px;
+  font-size: 20px;
   font-weight: bold;
-  line-height: 34px;
-  height: 34px;
+  line-height: 20px;
+  height: 80px;
   margin-right: -1px;
   margin-top: -1px;
   padding: 0;
   text-align: center;
-  width: 34px;
+  width: 80px;
 }
 
 .square:focus {
