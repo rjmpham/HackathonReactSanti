@@ -1,11 +1,14 @@
 import Vector2 from './Vector2';
 
 export default class Player{
+    playerName ='';
     workers = []
-    gameController = null;
+    gameState = null;
+    moveDistance = 1;
 
-    constructor(gameController){
-        this.gameController == gameController;
+    constructor(gameState, playerName){
+        this.gameState == gameState;
+        this.playerName = playerName;
     }
 
     //creates a new worker at the target position, but does not update the gameState.
@@ -13,15 +16,17 @@ export default class Player{
         this.workers.push(new Worker(gender, position));
     }
 
-    //updates the workers position, but not the gameState
-    moveWorker(worker, targetPosition){
-        this.workers.find(x => x===worker).position = targetPosition;
+    //updates the workers position, but not the gameState (UNLESS THE PLAYER WON.)
+    moveWorker(workerPosition, targetPosition){
+        this.workers.find(x => x.position === workerPosition).position = targetPosition;
+        if(this.gameState.getTile(worker.position).hasWorkerWon())
+            this.gameState.winner = this;
     }
 
     //gets all valid moves as an array of Vector2s, of the valid moves for a given worker.
     getAllValidWorkerMoves(worker){
-        let workerTile = this.gameController.gameState.getTile(worker.position);
-        let localNine = this.gameController.gameState.getLocalNine(worker.position);
+        let workerTile = this.gameState.getTile(worker.position);
+        let localNine = this.gameState.getLocalNine(worker.position);
         localNine = localNine.filter(tile => tile.isBuildable()); //filter out all capped and worker filled tiles
         localNine = localNine.filter(tile => tile.topLevel <= workerTile.topLevel+1); //filter out all tiles that are too high
         
@@ -30,7 +35,7 @@ export default class Player{
 
      //gets all valid build locations as an array of Vector2s, of the valid moves for a given worker.
     getAllValidBuildLocations(worker){
-        let localNine = this.gameController.getWorkerLocalNine(worker.position);
+        let localNine = this.gameState.getWorkerLocalNine(worker.position);
         localNine = localNine.filter(tile => tile.isBuildable()); //filter out all capped and worker filled tiles
         return localNine.map(tile => tile.position);
     }

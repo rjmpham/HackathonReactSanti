@@ -1,5 +1,5 @@
 export default class Worker{
-    gender = '';
+    gender = 0;
     position = null;
 
     constructor(gender, position){
@@ -7,3 +7,4 @@ export default class Worker{
         this.position = position;
     }
 }
+

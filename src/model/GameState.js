@@ -1,11 +1,12 @@
 export default class GameState{
     boardState = null;
-   
-    player1 = null;
-    player2 = null;
+
+    playerList = []
+
     activePlayer = null;
-    moveDistance = 1;
     boardSize = 0;
+
+    winner = null;
     
     constructor(boardSize){
 		this.gameState = [boardSize][boardSize];
@@ -14,9 +15,9 @@ export default class GameState{
 				gameState[x][y] = new Tile(x, y); // 0 means nothing has been built
 			}
 		}
-		//player1 = new Player();
-		//player2 = new Player();
-        this.activePlayer = player1;
+        
+        this.playerList = [new Player(this, "Player 0."), new Player(this, "Player 1")];
+        this.activePlayer = this.playerList[0];
         this.boardSize = boardSize;
     }
     
@@ -47,12 +48,21 @@ export default class GameState{
     }
 
     //update the boardState.
-    buildAt(x, y){
-		this.boardState[x][y].buildLevel();
+    buildFloor(x, y){
+		this.boardState[x][y].buildFloor();
+    }
+
+    buildFloor(position){
+        this.boardState[position.x][position.y].buildFloot();
     }
     
     //update the boardState
     moveWorker(workerPosition, targetPosition){
         this.boardState[workerPosition.x, workerPosition.y].moveWorker();
         this.boardSize[targetPosition.x, targetPosition.y].removeWorker();
+    }
+
+    playerHasWon(){
+        return winner === null;
+    }
 }
