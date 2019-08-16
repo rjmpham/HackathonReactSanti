@@ -12,14 +12,14 @@ export default class GameState{
     winner = null;
     
     constructor(boardSize){
-        this.gameState = new Array(boardSize);
-        for (var i = 0; i < this.gameState.length; i++) {
-            this.gameState[i] = new Array(boardSize);
+        this.boardState = new Array(boardSize);
+        for (var i = 0; i < this.boardState.length; i++) {
+            this.boardState[i] = new Array(boardSize);
         }
         
-		for(let x = 0; x < this.gameState[0].length; x++){
-			for(let y = 0; y < this.gameState[x].length; y++){
-				this.gameState[x][y] = new Tile(x, y); // 0 means nothing has been built
+		for(let x = 0; x < this.boardState[0].length; x++){
+			for(let y = 0; y < this.boardState[x].length; y++){
+				this.boardState[x][y] = new Tile(x, y); // 0 means nothing has been built
 			}
 		}
         
@@ -47,7 +47,7 @@ export default class GameState{
     }
 
     getTile(vector2){
-        return this.gameState[vector2.x][vector2.y];
+        return this.boardState[vector2.x][vector2.y];
     }
 
     buildFloor(position){

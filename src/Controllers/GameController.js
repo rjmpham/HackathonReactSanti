@@ -1,10 +1,9 @@
-import GameState from '../Model/GameState';
 import Player from './Player';
 import Worker from "../Model/Worker";
 
 export default class GameController{
-	constructor(boardSize){
-        this.gameState = new GameState(boardSize);
+	constructor(gameState){
+        this.gameState = gameState;
         this.player_1 = new Player();
         this.player_2 = new Player();
     }

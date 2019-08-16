@@ -11,18 +11,20 @@ export default class Square extends React.Component{
         return (
             <button className="square" onClick={this.handleClick(this.props)}>
                 <div className= "buildRow">   
-                    <div className= "buildDisplay"> 1</div>
+                    <div className= "buildDisplay"> 
+                        {this.props.gameState.getTile(this.props.value).topLevel} 
+                    </div>
                     <div className= "buildSpace"> </div>
-                    <div className= "buildDisplay"> 2</div>
+                    <div className= "buildDisplay"> </div>
                 </div>
       
                 <div className= "playerRow">
-                    {this.props.x}
+                    {this.props.value.x}
                 </div>
                 <div className= "buildRow">  
-                    <div className= "buildDisplay"> 3</div>
+                    <div className= "buildDisplay"> </div>
                     <div className= "buildSpace"> </div>
-                    <div className= "buildDisplay"> D</div>
+                    <div className= "buildDisplay"></div>
                 </div>
         
         
