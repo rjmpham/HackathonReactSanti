@@ -8,10 +8,13 @@ export default class GameController{
     gameState = null;
     
 	constructor(){
-		this.gameState = new GameState(5); //creates a 5x5 board state.
+        newGame();
 	}
 	
-	
+    newGame(){
+        this.gameState = new GameState(5); //creates a 5x5 board state.
+    }
+    
     //This is where the game loop should be!
     beginTurn(){
 
