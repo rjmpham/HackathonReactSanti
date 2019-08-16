@@ -1,5 +1,4 @@
 import React from "react";
-import Vector2 from "../Model/Vector2.js"
 
 const BOARD_SIZE = 5;
 
@@ -65,8 +64,6 @@ export default class Board extends React.Component {
       <div>
         {boardJSX}
       </div>
-      
-      
     );
   }
 }

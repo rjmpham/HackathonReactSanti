@@ -1,15 +1,16 @@
-import GameState from './GameState';
+import GameState from '../Model/GameState';
+import Player from './Player';
+import Worker from "../Model/Worker";
 
 export default class GameController{
-	
-    gameState = null;
-    
-	constructor(){
-        newGame();
-	}
-	
-    newGame(){
-        this.gameState = new GameState(5); //creates a 5x5 board state.
+	constructor(boardSize){
+        this.gameState = new GameState(boardSize);
+        this.player_1 = new Player();
+        this.player_2 = new Player();
+    }
+
+    placeWorker(gender, position, player) {
+        this.player.workers.push(new Worker(gender, position));
     }
     
     //This is where the game loop should be!
@@ -28,33 +29,18 @@ export default class GameController{
         this.gameState.buildFloor(targetPosition); //update the board state
     }
 
-   
 
     endTurn(){
 
         //update the active player
-        let playerIndex = this.gameState.playerList.indexOf(activePlayer);
-        playerIndex = (playerIndex + 1)% this.gameState.playerList.length;
-        activePlayer =this.gameState.playerList[playerIndex];
+        // let playerIndex = this.gameState.playerList.indexOf(activePlayer);
+        // playerIndex = (playerIndex + 1)% this.gameState.playerList.length;
+        // activePlayer =this.gameState.playerList[playerIndex];
 
         //TODO: 
-            //Updates the view, based on what the player is allowed to do.
+        //Updates the view, based on what the player is allowed to do.
     }
     
-	
-	
-    
-    gameOver(){
-        
-    }
-    
-   
-
-    
-
-    
-
-	
 }
 
 
