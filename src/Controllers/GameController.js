@@ -1,16 +1,25 @@
 import GameState from '../Model/GameState';
 import Player from './Player';
 import Worker from "../Model/Worker";
+import Vector2 from '../Model/Vector2';
 
 export default class GameController{
 	constructor(boardSize){
         this.gameState = new GameState(boardSize);
-        this.player_1 = new Player();
-        this.player_2 = new Player();
+        this.players = [new Player(), new Player()]
+    }
+
+    newGame() {
+        for (var i = 0; i < 4; i++) {
+            let x = Math.round(Math.random() * 4);
+            let y = Math.round(Math.random() * 4);
+            this.placeWorker(null, new Vector2(x, y), this.players[i % 2]);
+        }
     }
 
     placeWorker(gender, position, player) {
-        this.player.workers.push(new Worker(gender, position));
+        player.workers.push(new Worker(gender, position));
+        console.log(player.workers)
     }
     
     //This is where the game loop should be!
