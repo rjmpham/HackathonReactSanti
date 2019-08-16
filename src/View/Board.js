@@ -1,47 +1,23 @@
 import React from "react";
 import Vector2 from "../Model/Vector2.js"
-
+import Square from "./Square.js"
 const BOARD_SIZE = 5;
-
-function Square(props) {
-    return (
-      <button className="square" onClick={props.onClick}>
-          <div className= "buildRow">   
-              <div className= "buildDisplay"> 1</div>
-              <div className= "buildSpace"> </div>
-              <div className= "buildDisplay"> 2</div>
-          </div>
-          <div className= "playerRow">
-              {props.value}
-          </div>
-          <div className= "buildRow">  
-              <div className= "buildDisplay"> 3</div>
-              <div className= "buildSpace"> </div>
-              <div className= "buildDisplay"> D</div>
-          </div>
-  
-  
-      </button>
-    );
-  }
 
 export default class Board extends React.Component {
 
-
+  //takes a vector and assigns that vector to a square, also assigns an onclick method?
   renderSquare(i) {
-      
     return (
       <Square 
         value = {i}
-        onClick={() => this.props.onClick(i)}
       />
     );
   }
 
   generateBoardRow(row_index){
     let squareJSX = [];
-    for(let i =row_index*BOARD_SIZE; i < row_index*BOARD_SIZE + BOARD_SIZE; i++){
-      squareJSX.push(this.renderSquare(i));
+    for(let y =0; y < BOARD_SIZE; y++){
+      squareJSX.push(this.renderSquare(new Vector2(row_index,y)));
     }
     return squareJSX;
   }

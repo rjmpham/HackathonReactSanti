@@ -1,5 +1,5 @@
 import React from "react";
-import Board from "./Board.js"
+import Board from "./Board.js";
 
 export default class Game extends React.Component {
 
@@ -7,8 +7,8 @@ export default class Game extends React.Component {
       return (
         <div className="game">
           <div className="game-board">
-            <Board
-              onClick={(i) => this.handleClick(i)}
+            <Board 
+
             />
   
           </div>

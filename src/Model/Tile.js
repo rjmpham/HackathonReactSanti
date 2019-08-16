@@ -1,4 +1,4 @@
-import {FLOOR} from './Floor.js/index.js' 
+import {FLOOR} from './Floor.js' 
 import Vector2 from './Vector2.js'
 export default class Tile {
     description = 'This is a tile!';

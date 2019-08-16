@@ -42,17 +42,8 @@ export default class GameState{
         return localNine;
     }
 
-    getTile(x, y){
-        return this.gameState[x][y];
-    }
-
     getTile(vector2){
         return this.gameState[vector2.x][vector2.y];
-    }
-
-    //update the boardState.
-    buildFloor(x, y){
-		this.boardState[x][y].buildFloor();
     }
 
     buildFloor(position){

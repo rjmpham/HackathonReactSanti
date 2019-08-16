@@ -5,7 +5,7 @@ export default class GameController{
     gameState = null;
     
 	constructor(){
-        newGame();
+        this.newGame();
 	}
 	
     newGame(){
