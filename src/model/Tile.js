@@ -11,18 +11,34 @@ export default class Tile {
         this.gridLocation = new Vector2(x,y);
     }
 
-    isCapped(){
-        return this.capped;
+    movePlayer(){
+        this.playerPresent = true;
     }
-    
-    isPlayerPresent(){
-        return this.playerPresent;
+
+    removePlayer(){
+        this.isPlayerPresent = false;
+    }
+
+    //currently also the isMoveable
+    isBuildable(){
+        let output = true;
+        if(this.capped||this.playerPresent){
+            output = false;
+        }
+        return output;
     }
 
     buildFloor(){
-        this.topLevel+=1;
-        if(this.topLevel===4){
+        if((this.topLevel+1)===4){
             this.capped = true;
+        } else {
+            this.topLevel+=1;
         }
     }
+
+    //uncaping requires memory of previos top floor
+
+    //overide floor can accept something and set topLevel for future changes.
+
+
 }
