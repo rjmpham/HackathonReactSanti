@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
+import Player from "./Controllers/Player";
 
 function Square(props) {
   return (

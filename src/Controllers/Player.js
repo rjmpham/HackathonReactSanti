@@ -1,5 +1,3 @@
-import Vector2 from './Vector2';
-
 export default class Player{
     playerName ='';
     workers = []
@@ -7,7 +5,7 @@ export default class Player{
     moveDistance = 1;
 
     constructor(gameState, playerName){
-        this.gameState == gameState;
+        this.gameState = gameState;
         this.playerName = playerName;
     }
 
@@ -19,7 +17,7 @@ export default class Player{
     //updates the workers position, but not the gameState (UNLESS THE PLAYER WON.)
     moveWorker(workerPosition, targetPosition){
         this.workers.find(x => x.position === workerPosition).position = targetPosition;
-        if(this.gameState.getTile(worker.position).hasWorkerWon())
+        if(this.gameState.getTile(workerPosition).hasWorkerWon())
             this.gameState.winner = this;
     }
 
