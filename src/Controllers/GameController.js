@@ -1,6 +1,3 @@
-import Tile from './Tile';
-import Player from './Player';
-import Vector2 from './Vector2';
 import GameState from './GameState';
 
 export default class GameController{

@@ -1,5 +1,5 @@
 export default class Player{
-    playerName ='';
+    playerName = '';
     workers = []
     gameState = null;
     moveDistance = 1;
