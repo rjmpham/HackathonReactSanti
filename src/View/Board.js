@@ -41,8 +41,6 @@ export default class Board extends React.Component {
       <div>
         {boardJSX}
       </div>
-      
-      
     );
   }
 }
