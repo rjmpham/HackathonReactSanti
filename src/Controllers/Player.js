@@ -1,13 +1,6 @@
 export default class Player{
-    playerName ='';
     workers = []
-    gameState = null;
     moveDistance = 1;
-
-    constructor(gameState, playerName){
-        this.gameState = gameState;
-        this.playerName = playerName;
-    }
 
     //creates a new worker at the target position, but does not update the gameState.
     placeWorker(gender, position){

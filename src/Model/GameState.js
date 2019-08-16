@@ -1,3 +1,6 @@
+import Tile from "./Tile.js";
+import Player from "../Controllers/Player.js";
+
 export default class GameState{
     boardState = null;
 
@@ -9,10 +12,14 @@ export default class GameState{
     winner = null;
     
     constructor(boardSize){
-		this.gameState = [boardSize][boardSize];
-		for(let x = 0; x < gameState[0].length; x++){
-			for(let y = 0; y < gameState[x].length; y++){
-				gameState[x][y] = new Tile(x, y); // 0 means nothing has been built
+        this.gameState = new Array(boardSize);
+        for (var i = 0; i < this.gameState.length; i++) {
+            this.gameState[i] = new Array(boardSize);
+        }
+        
+		for(let x = 0; x < this.gameState[0].length; x++){
+			for(let y = 0; y < this.gameState[x].length; y++){
+				this.gameState[x][y] = new Tile(x, y); // 0 means nothing has been built
 			}
 		}
         
@@ -25,12 +32,12 @@ export default class GameState{
     //Returns up to 9 Tiles, depending if the position is on the edge of the board or not.
     getLocalNine(position){
         let localNine = [];
-        for(dx = -1; dx <= 1; dx++){
-            for(dy = -1; dy <= 1; dy++){
+        for(let dx = -1; dx <= 1; dx++){
+            for(let dy = -1; dy <= 1; dy++){
                 let tx = position.x + dx ;
                 let ty = position.y + dy;
-                if(tx >= 0 && tx <= boardSize){
-                    if(ty >= 0 && tx <= boardSize){
+                if(tx >= 0 && tx <= this.boardSize){
+                    if(ty >= 0 && tx <= this.boardSize){
                         localNine.push(this.boardState[tx, ty]);
                     }
                 }
@@ -39,17 +46,8 @@ export default class GameState{
         return localNine;
     }
 
-    getTile(x, y){
-        return this.gameState[x][y];
-    }
-
     getTile(vector2){
         return this.gameState[vector2.x][vector2.y];
-    }
-
-    //update the boardState.
-    buildFloor(x, y){
-		this.boardState[x][y].buildFloor();
     }
 
     buildFloor(position){
@@ -63,6 +61,6 @@ export default class GameState{
     }
 
     playerHasWon(){
-        return winner === null;
+        return this.winner === null;
     }
 }
