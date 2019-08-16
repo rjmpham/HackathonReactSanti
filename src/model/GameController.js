@@ -34,38 +34,37 @@ export default class GameController{
 		this.gameState[x][y].buildLevel();
 	}
 	
-	verifyMove(worker, position){
-        return this.getAllValidMoves(worker).includes(pos);
+	verifyMove(workerPosition, targetPosition){
+        return this.getAllValidMoves(workerPosition).includes(targetPosition);
 	}
 	
-	verifyBuildAt(worker, position){
-		return this.getAllValidBuildLocations(worker).includes(position);
+	verifyBuildAt(workerPosition, targetPosition){
+		return this.getAllValidBuildLocations(workerPosition).includes(targetPosition);
     }
     
 
     //Returns a 1D list of tiles that the current turn player can move.
-    getAllValidMoves(worker){
-        let workerTile = this.getTile(worker.position);
-        let localNine = this.getPlayerLocalNine();
+    getAllValidMoves(workerPosition){
+        let workerTile = this.getTile(workerPosition);
+        let localNine = this.getWorkerLocalNine();
         localNine = localNine.filter(tile => tile.isBuildable()); //filter out all capped and worker filled tiles
         localNine = localNine.filter(tile => tile.topLevel <= workerTile.topLevel+1); //filter out all tiles that are too high
         
         return localNine.map(tile => tile.position);
     }
 
-    getAllValidBuildLocations(worker){
-        let workerTile = this.getTile(worker);
-        let localNine = this.getPlayerLocalNine();
+    getAllValidBuildLocations(workerPosition){
+        let localNine = this.getWorkerLocalNine(workerPosition);
         localNine = localNine.filter(tile => tile.isBuildable()); //filter out all capped and worker filled tiles
         return localNine.map(tile => tile.position);
     }
 
-    getWorkerLocalNine(worker){
+    getWorkerLocalNine(workerPosition){
         let localNine = [];
         for(dx = -1; dx <= 1; dx++){
             for(dy = -1; dy <= 1; dy++){
-                let tx = worker.position.x + dx ;
-                let ty = worker.position.y + dy;
+                let tx = workerPosition.x + dx ;
+                let ty = workerPosition.y + dy;
                 if(tx >= 0 && tx <= boardSize){
                     if(ty >= 0 && tx <= boardSize){
                         localNine.push(this.gameState[tx, ty]);
@@ -81,13 +80,11 @@ export default class GameController{
         return this.gameState[x][y];
     }
 
-    getTile(position){
-        return this.gameState[position.x, position.y];
+    getTile(vector2){
+        return this.gameState[vector2.x][vector2.y];
     }
 
-    getTile(player){
-        return this.gameState[player.position.x][player.position.y];
-    }
+   
 
 	
 }
