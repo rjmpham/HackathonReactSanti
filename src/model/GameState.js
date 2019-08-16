@@ -53,7 +53,6 @@ export default class GameState{
     
     //update the boardState
     moveWorker(workerPosition, targetPosition){
-        this.boardState[workerPosition.x, workerPosition.y].playerPresent = false;
-        this.boardSize[targetPosition.x, targetPosition.y].playerPresent = true;
-    }
+        this.boardState[workerPosition.x, workerPosition.y].moveWorker();
+        this.boardSize[targetPosition.x, targetPosition.y].removeWorker();
 }
