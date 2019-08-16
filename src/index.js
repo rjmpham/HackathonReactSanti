@@ -5,7 +5,21 @@ import "./index.css";
 function Square(props) {
   return (
     <button className="square" onClick={props.onClick}>
-      {props.value}
+        <div className= "buildRow">   
+            <div className= "buildDisplay"> 1</div>
+            <div className= "buildSpace"> </div>
+            <div className= "buildDisplay"> 2</div>
+        </div>
+        <div className= "playerRow">
+            {props.value}
+        </div>
+        <div className= "buildRow">  
+            <div className= "buildDisplay"> 3</div>
+            <div className= "buildSpace"> </div>
+            <div className= "buildDisplay"> D</div>
+        </div>
+
+
     </button>
   );
 }
