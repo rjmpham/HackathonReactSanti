@@ -1,9 +1,4 @@
-export default class Vector2{
-    location_x = -1;
-    location_y = -1;
-
-    constructor(x_in,y_in){
-        this.location_x=x_in;
-        this.location_y =y_in;
-    }
+export default function Vector2(x, y){
+    this.x =x;
+    this.y = y;
 }

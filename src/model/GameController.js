@@ -1,6 +1,8 @@
+import Tile from './Tile';
+import Player from './Player';
+import Vector2 from './Vector2';
 
-
-class GameController{
+export default class GameController{
 	gameState = null;
 	player1 = null;
 	player2 = null;
@@ -32,38 +34,38 @@ class GameController{
 		this.gameState[x][y].buildLevel();
 	}
 	
-	verifyMove(x, y){
-		
+	verifyMove(worker, position){
+        return this.getAllValidMoves(worker).includes(pos);
 	}
 	
-	verifyBuildAt(x, y){
-		return this.gameState[x][y] <4;
+	verifyBuildAt(worker, position){
+		return this.getAllValidBuildLocations(worker).includes(position);
     }
     
 
     //Returns a 1D list of tiles that the current turn player can move.
-    getAllValidMoves(){
-        let playerTile = this.getTile(activePlayer);
+    getAllValidMoves(worker){
+        let workerTile = this.getTile(worker.position);
         let localNine = this.getPlayerLocalNine();
-        localNine = localNine.filter(tile => tile.canPlayerMoveTo()); //filter out all capped and worker filled tiles
-        localNine = localNine.filter(tile => tile.topLevel <= playerTile.topLevel+1); //filter out all tiles that are too high
+        localNine = localNine.filter(tile => tile.isBuildable()); //filter out all capped and worker filled tiles
+        localNine = localNine.filter(tile => tile.topLevel <= workerTile.topLevel+1); //filter out all tiles that are too high
         
         return localNine.map(tile => tile.position);
     }
 
-    getAllValidBuildLocations(){
-        let playerTile = this.getTile(activePlayer);
+    getAllValidBuildLocations(worker){
+        let workerTile = this.getTile(worker);
         let localNine = this.getPlayerLocalNine();
-        localNine = localNine.filter(tile => tile.canPlayerMoveTo()); //filter out all capped and worker filled tiles
+        localNine = localNine.filter(tile => tile.isBuildable()); //filter out all capped and worker filled tiles
         return localNine.map(tile => tile.position);
     }
 
-    getPlayerLocalNine(){
+    getWorkerLocalNine(worker){
         let localNine = [];
         for(dx = -1; dx <= 1; dx++){
             for(dy = -1; dy <= 1; dy++){
-                let tx = this.activePlayer.position.x + dx ;
-                let ty = this.activePlayer.position.y + dy;
+                let tx = worker.position.x + dx ;
+                let ty = worker.position.y + dy;
                 if(tx >= 0 && tx <= boardSize){
                     if(ty >= 0 && tx <= boardSize){
                         localNine.push(this.gameState[tx, ty]);
@@ -88,12 +90,6 @@ class GameController{
     }
 
 	
-}
-
-class Player(){
-    position = null;
-    }
-
 }
 
 
