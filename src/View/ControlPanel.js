@@ -1,11 +1,9 @@
-import React from 'react';
-
 function ControlPannel(){
     let controlJSX = this.generateBoard();
     return(
-          <div>
+        <div>
             {controlJSX}
-          </div>
-    )
+        </div>
+    );
     
 } export default ControlPannel;

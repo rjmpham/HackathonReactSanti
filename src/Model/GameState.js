@@ -1,5 +1,5 @@
-import Tile from "./Tile.js";
-import Player from "../Controllers/Player.js";
+import Tile from './Tile.js';
+import Player from '../Controllers/Player.js';
 
 export default class GameState{
     boardState = null;
@@ -20,13 +20,13 @@ export default class GameState{
             this.boardState[i] = new Array(boardSize);
         }
         
-		for(let x = 0; x < this.boardState[0].length; x++){
-			for(let y = 0; y < this.boardState[x].length; y++){
-				this.boardState[x][y] = new Tile(x, y); // 0 means nothing has been built
-			}
-		}
+        for(let x = 0; x < this.boardState[0].length; x++){
+            for(let y = 0; y < this.boardState[x].length; y++){
+                this.boardState[x][y] = new Tile(x, y); // 0 means nothing has been built
+            }
+        }
         
-        this.playerList = [new Player(this, "Player 0."), new Player(this, "Player 1")];
+        this.playerList = [new Player(this, 'Player 0.'), new Player(this, 'Player 1')];
         this.activePlayer = this.playerList[0];
         this.boardSize = boardSize;
     }
@@ -69,9 +69,9 @@ export default class GameState{
 
     highlightTiles(positions){
         if(this.selectedWorker === null)
-            console.error("Selected worker is null");
+            console.error('Selected worker is null');
         
-            positions.foreach( position => {
+        positions.foreach( position => {
             this.boardState.getTile(position).isHighlighted = true;
             this.highlightedTiles.push(position);
         });
@@ -91,13 +91,13 @@ export default class GameState{
        
        
         
-		for(let x = 0; x < this.boardState[0].length; x++){
-			for(let y = 0; y < this.boardState[x].length; y++){
-				this.boardState[x][y] = new Tile(x, y); // 0 means nothing has been built
-			}
-		}
+        for(let x = 0; x < this.boardState[0].length; x++){
+            for(let y = 0; y < this.boardState[x].length; y++){
+                this.boardState[x][y] = new Tile(x, y); // 0 means nothing has been built
+            }
+        }
         
-        this.playerList = [new Player(this, "Player 0."), new Player(this, "Player 1")];
+        this.playerList = [new Player(this, 'Player 0.'), new Player(this, 'Player 1')];
         this.activePlayer = this.playerList[0];
         
     }

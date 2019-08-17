@@ -1,5 +1,5 @@
-import {FLOOR} from './Floor.js' 
-import Vector2 from './Vector2.js'
+import {FLOOR} from './Floor.js';
+import Vector2 from './Vector2.js';
 export default class Tile {
     description = 'This is a tile!';
     topLevel = FLOOR.GROUND;
@@ -13,7 +13,7 @@ export default class Tile {
     }
 
     moveWorker(worker){
-        this.worker = worker
+        this.worker = worker;
     }
 
     removeWorker(){

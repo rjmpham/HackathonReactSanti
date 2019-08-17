@@ -1,6 +1,7 @@
 import Player from './Player';
-import Worker from "../Model/Worker";
-import { nullLiteral } from '@babel/types';
+// eslint-disable-next-line no-unused-vars
+import Worker from '../Model/Worker';
+// eslint-disable-next-line no-unused-vars
 import Vector2 from '../Model/Vector2';
 import GameState from '../Model/GameState';
 
@@ -59,7 +60,7 @@ export default class GameController{
         this.player_1 = new Player();
         this.player_2 = new Player();
         this.activePlayer = this.player_1;
-        console.log("Created a new game.");
+        console.log('Created a new game.');
     }
 
     endGame(){
@@ -67,7 +68,6 @@ export default class GameController{
     }
 
     handleBoardClick(position){
-        let clickedTile = this.gameState.getTile(position);
 
 
         //do we need to place workers?
@@ -104,13 +104,13 @@ export default class GameController{
         if(this.player_1.workers.length === 2 && this.player_2.workers.length ===2)
         {
             this.isInSetup = false;
-            console.log("Setup has finished.");
+            console.log('Setup has finished.');
             return false;
         }
 
         //Can't place a worker on top of another.
         if(clickedTile.worker !== null){
-            console.log("Cannot place worker, tile is occupied.");
+            console.log('Cannot place worker, tile is occupied.');
             return true;
         }
          
@@ -126,7 +126,7 @@ export default class GameController{
         //player 2 places their worker
         if(this.player_2.workers.length < 2){
             clickedTile.moveWorker(this.player_2.placeWorker(position));
-            console.log("Has tile ref updated?"  + this.gameState.getTile(position).worker);
+            console.log('Has tile ref updated?'  + this.gameState.getTile(position).worker);
             //this.gameState.setTile(position, clickedTile);
 
             // first check for finished setup
@@ -147,7 +147,7 @@ export default class GameController{
         else{
             this.gameState.clearHighlightedTiles();
         }
-            //clearWorkerMovesHighlighitng();
+        //clearWorkerMovesHighlighitng();
     }
 
     clearWorkerMovesHighlighitng(){

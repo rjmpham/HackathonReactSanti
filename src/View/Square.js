@@ -2,13 +2,13 @@ import React from 'react';
 
 export default class Square extends React.Component{
     constructor(props) {
-        super(props)
+        super(props);
     
         console.log(this.props.gameState);
         this.state = {
             displayLevel: this.props.gameState.getTile(this.props.position).topLevel,
             worker: ''
-        }
+        };
     }
 
     handleClick(){
@@ -17,13 +17,12 @@ export default class Square extends React.Component{
         if( this.props.gameState.getTile(this.props.position).worker !==null){
             this.setState({worker :this.props.gameState.getTile(this.props.position).worker.getIndicator()});
         } else {
-            console.log("Am I printing empty?");
             this.setState({worker :''});
         }
     }
     
     //pros.value is a Vector2 of the board position
-    render(props){
+    render(){
         return (
             <button className="square" onClick={() => this.handleClick()}>
                 <div className= "buildRow">   
