@@ -11,8 +11,9 @@ export default class Game extends React.Component {
     }
 
     handleBoardClick(i){
-        //this.controller.handleBoardClick(i);
+        this.controller.handleBoardClick(i);
     }
+
 
 
 

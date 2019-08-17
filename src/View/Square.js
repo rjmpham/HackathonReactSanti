@@ -10,7 +10,7 @@ export default class Square extends React.Component{
     }
 
     //pros.value is a Vector2 of the board position
-    render(){
+    render(props){
         return (
             <button className="square" onClick={() => this.handleClick()}>
                 <div className= "buildRow">   

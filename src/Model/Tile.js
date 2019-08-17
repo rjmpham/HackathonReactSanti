@@ -6,6 +6,7 @@ export default class Tile {
     capped = false;
     worker = null;
     gridLocation;
+    isHighlighted = false;
 
     constructor(x,y){
         this.gridLocation = new Vector2(x,y);

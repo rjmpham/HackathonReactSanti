@@ -41,6 +41,10 @@ export default class Player{
 		return this.getAllValidBuildLocations(worker.position).includes(targetPosition);
     }
 
+    hasWorkerAtPosition(position){
+        return this.workers.includes(x => x.position === position);
+    }
+
 
 }
 

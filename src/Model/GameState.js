@@ -64,7 +64,5 @@ export default class GameState{
         return this.winner === null;
     }
 
-    handleBoardBoardClick(position){
-
-    }
+   
 }
