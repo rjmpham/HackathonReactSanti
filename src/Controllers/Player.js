@@ -30,7 +30,7 @@ export default class Player{
     getAllValidWorkerMoves(position){
         let workerTile = this.gameState.getTile(position);
         let localNine = this.gameState.getLocalNine(position);
-        console.log("is it a  tile " + (localNine[0] instanceof Tile));
+        console.log(localNine);
         localNine = localNine.filter(tile => tile.isBuildable()); //filter out all capped and worker filled tiles
         localNine = localNine.filter(tile => tile.topLevel <= workerTile.topLevel+1); //filter out all tiles that are too high
         

@@ -41,7 +41,11 @@ export default class GameState{
                 let ty = position.y + dy;
                 if(tx >= 0 && tx <= this.boardSize){
                     if(ty >= 0 && tx <= this.boardSize){
-                        localNine.push(this.boardState[tx, ty]);
+                        if(!this.boardState[tx][ty] === undefined){
+                            console.log("pushing undefined to local 9.");
+                        }
+                        localNine.push(this.boardState[tx] [ty]);
+                        
                     }
                 }
             }
