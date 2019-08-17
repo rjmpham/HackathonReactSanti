@@ -141,7 +141,7 @@ export default class GameController{
 
         //Can't place a worker on top of another.
         if(clickedTile.worker !== null){
-            console.log("Cannot place worker, tile is occupied.");
+            console.log('Cannot place worker, tile is occupied.');
             return true;
         }
          
