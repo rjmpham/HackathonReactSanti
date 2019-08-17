@@ -10,6 +10,9 @@ export default class GameState{
     boardSize = 0;
 
     winner = null;
+
+    selectedWorker = null;
+    highlightedTiles = [];
     
     constructor(boardSize){
         this.boardState = new Array(boardSize);
@@ -64,5 +67,21 @@ export default class GameState{
         return this.winner === null;
     }
 
+    highlightTiles(positions){
+        if(this.selectedWorker === null)
+            console.error("Selected worker is null");
+        
+            positions.foreach( position => {
+            this.boardState.getTile(position).isHighlighted = true;
+            this.highlightedTiles.push(position);
+        });
+    }
+
+    clearHighlightedTiles(){
+        this.highlightedTiles.forEach(position => {
+            this.boardState.getTile(position).isHighlighted = false;
+        });
+    }
+    
    
 }

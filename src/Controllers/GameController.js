@@ -57,6 +57,7 @@ export default class GameController{
     }
 
     handleBoardClick(position){
+        this.handleWorkerSelection(position);
         //check to see if the tile has a worker on it.
 
         // let workerOnTile = this.gameState.getTile(position).worker
@@ -75,9 +76,14 @@ export default class GameController{
 
     
     handleWorkerSelection(position){
-        let workerOnTile = this.gameState.getTile(position).worker;
-        if(workerOnTile == null){
-
+        let selectedWorker = this.gameState.getTile(position).worker;
+        this.gameState.selectedWorker = selectedWorker;
+        if(selectedWorker === null){
+           
+            this.gameState.clearHighlightedTiles();
+        }
+        else{
+            this.gameState.clearHighlightedTiles();
         }
             //clearWorkerMovesHighlighitng();
     }
