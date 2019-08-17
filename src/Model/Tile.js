@@ -47,6 +47,12 @@ export default class Tile {
         return this.worker.getIndicator();
     }
 
+    reset(){
+        this.topLevel = FLOOR.GROUND;
+        this.capped = false;
+        this.worker = null;
+    }
+
 
     //uncaping requires memory of previos top floor
 

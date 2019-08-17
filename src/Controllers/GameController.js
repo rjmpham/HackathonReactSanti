@@ -55,9 +55,7 @@ export default class GameController{
     
 
     newGame(){
-        this.gameState = new GameState(5);
-        this.player_1 = new Player();
-        this.player_2 = new Player();
+        this.gameState.reset();
         this.activePlayer = this.player_1;
         console.log("Created a new game.");
     }
@@ -76,8 +74,7 @@ export default class GameController{
             this.isInSetup = this.handleSetup(position);
 
         }
-        if(this.isInSetup)
-            return;
+        
 
         //GO TO GAMELOOP
         
@@ -101,12 +98,12 @@ export default class GameController{
         let clickedTile = this.gameState.getTile(position);
 
         //Do both players have 2 workers?
-        if(this.player_1.workers.length === 2 && this.player_2.workers.length ===2)
-        {
-            this.isInSetup = false;
-            console.log("Setup has finished.");
-            return false;
-        }
+        // if(this.player_1.workers.length === 2 && this.player_2.workers.length ===2)
+        // {
+        //     this.isInSetup = false;
+        //     console.log("Setup has finished.");
+        //     return false;
+        // }
 
         //Can't place a worker on top of another.
         if(clickedTile.worker !== null){
@@ -130,7 +127,9 @@ export default class GameController{
             //this.gameState.setTile(position, clickedTile);
 
             // first check for finished setup
-            // if(2) then return false;
+            if(this.player_2.length === 2)
+                return false;
+            
             return true;
         }
           

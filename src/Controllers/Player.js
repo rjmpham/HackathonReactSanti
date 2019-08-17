@@ -51,6 +51,10 @@ export default class Player{
         return this.workers.includes(x => x.position === position);
     }
 
+    reset(){
+        this.workers = [];
+    }
+
 
 }
 

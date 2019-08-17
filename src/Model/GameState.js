@@ -93,11 +93,11 @@ export default class GameState{
         
 		for(let x = 0; x < this.boardState[0].length; x++){
 			for(let y = 0; y < this.boardState[x].length; y++){
-				this.boardState[x][y] = new Tile(x, y); // 0 means nothing has been built
+				this.boardState[x][y].reset();
 			}
 		}
         
-        this.playerList = [new Player(this, "Player 0."), new Player(this, "Player 1")];
+       this.playerList.forEach(x => x.reset());
         this.activePlayer = this.playerList[0];
         
     }
