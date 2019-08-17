@@ -9,6 +9,11 @@ export default class Game extends React.Component {
       this.gameState = new GameState(5);
       this.controller = new Controller(this.gameState);
     }
+    handleClick(i){
+        //this.controller.handleBoardClick(i);
+    }
+
+
 
     render() {    
       return (

@@ -2,14 +2,10 @@ import React from "react";
 
 export default class Square extends React.Component{
 
-    handleClick(i){
-
-    }
-
     //pros.value is a Vector2 of the board position
     render(){
         return (
-            <button className="square" onClick={this.handleClick(this.props)}>
+            <button className="square" onClick={this.props.onClick(this.props.position)}>
                 <div className= "buildRow">   
                     <div className= "buildDisplay"> 
                         {this.props.gameState.getTile(this.props.value).topLevel} 
@@ -19,7 +15,7 @@ export default class Square extends React.Component{
                 </div>
       
                 <div className= "playerRow">
-                    {this.props.value.x}
+                    {this.props.position.x},{this.props.position.y}
                 </div>
                 <div className= "buildRow">  
                     <div className= "buildDisplay"> </div>
