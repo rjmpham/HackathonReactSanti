@@ -4,7 +4,8 @@ import Worker from '../Model/Worker.js';
 
 export default class GameController{
     
-    activePlayer = null;
+
+    //These should be moved to gamestate at some point
     isInSetup = true;
     needsToSelectWorker = false;
     workerNeedsToMove = false;
@@ -12,16 +13,15 @@ export default class GameController{
     
     gameState = null;
     
-    
     constructor(){
         this.gameState = new GameState(5);
         this.player_1 = new Player(this.gameState);
         this.player_2 = new Player(this.gameState);
-        this.activePlayer = this.player_1;
+        this.gameState.activePlayer=this.player_1;
     }
 
     placeWorker(position) {
-        this.activePlayer.placeWorker(position);
+        this.gameState.activePlayer.placeWorker(position);
     }
     
     //This is where the game loop should be!
@@ -63,7 +63,11 @@ export default class GameController{
 
     newGame(){
         this.gameState.reset();
-        this.activePlayer = this.player_1;
+        this.isInSetup = true;
+        this.needsToSelectWorker = false;
+        this.workerNeedsToMove = false;
+        this.player_1 = new Player(this.gameState);
+        this.player_2 = new Player(this.gameState);
         console.log('Created a new game.');
     }
 
@@ -75,9 +79,7 @@ export default class GameController{
     handleWorkerMovement(position){
         let selectedWorkerPosition = this.gameState.selectedWorker.position;
         
-
-
-        if(this.activePlayer.verifyMove(selectedWorkerPosition, position)){
+        if(this.gameState.activePlayer.verifyMove(selectedWorkerPosition, position)){
             console.log('Moving worker to ' + position.toString());
             this.moveWorker(selectedWorkerPosition, position);
 
@@ -101,8 +103,8 @@ export default class GameController{
 
         //they have selected a worker. But is it theirs?
         let selectedWorker = clickedTile.worker;
-        //console.log("I recieved " +this.activePlayer.hasWorkerAtPosition(position) );
-        if(this.activePlayer.hasWorkerAtPosition(position)){
+        //console.log("I recieved " +this.gameState.activePlayer.hasWorkerAtPosition(position) );
+        if(this.gameState.activePlayer.hasWorkerAtPosition(position)){
             console.log('The user has selected their worker');
             this.gameState.selectedWorker = selectedWorker;
             this.workerNeedsToMove = true;
@@ -115,7 +117,7 @@ export default class GameController{
     }
 
     handleBoardClick(position){
-        console.log('It is ' + ((this.activePlayer === this.player_1)? 'player 1s' : 'player 2s') + ' turn.');
+        console.log('It is ' + ((this.gameState.activePlayer === this.player_1)? 'player 1s' : 'player 2s') + ' turn.');
 
 
         //do we need to place workers?
@@ -176,6 +178,7 @@ export default class GameController{
             if(this.player_2.workers.length === 2){
                 this.needsToSelectWorker = true;
                 console.log('Both players have placed their pieces.');
+                this.gameState.activePlayer=this.player_1;
                 return false;
             }
                 

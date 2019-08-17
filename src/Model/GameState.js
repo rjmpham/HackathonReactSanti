@@ -27,8 +27,6 @@ export default class GameState{
             }
         }
         
-        this.playerList = [new Player(this, 'Player 0.'), new Player(this, 'Player 1')];
-        this.activePlayer = this.playerList[0];
         this.boardSize = boardSize;
     }
     
@@ -98,19 +96,14 @@ export default class GameState{
         this.boardState[position.x, position.y] = tile;
     }
 
-    reset(){
-       
-       
-        
+    reset(){        
         for(let x = 0; x < this.boardState[0].length; x++){
             for(let y = 0; y < this.boardState[x].length; y++){
                 this.boardState[x][y].reset();
             }
         }
         
-        this.playerList.forEach(x => x.reset());
-        this.activePlayer = this.playerList[0];
-        
+        this.playerList.forEach(x => x.reset());        
     }
     
    
