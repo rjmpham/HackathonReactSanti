@@ -9,7 +9,7 @@ export default class Board extends React.Component {
   renderSquare(i) {
     return (
       <Square 
-        value = {i}
+        position = {i}
         gameState={this.props.gameState}
       />
     );

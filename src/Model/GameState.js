@@ -51,7 +51,7 @@ export default class GameState{
     }
 
     buildFloor(position){
-        this.boardState[position.x][position.y].buildFloot();
+        this.boardState[position.x][position.y].buildFloor();
     }
     
     //update the boardState
@@ -62,5 +62,9 @@ export default class GameState{
 
     playerHasWon(){
         return this.winner === null;
+    }
+
+    handleBoardBoardClick(position){
+
     }
 }

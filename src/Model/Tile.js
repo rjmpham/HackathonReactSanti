@@ -4,30 +4,31 @@ export default class Tile {
     description = 'This is a tile!';
     topLevel = FLOOR.GROUND;
     capped = false;
-    workerPresent = false;
+    worker = null;
     gridLocation;
 
     constructor(x,y){
         this.gridLocation = new Vector2(x,y);
     }
 
-    moveWorker(){
-        this.workerPresent = true;
+    moveWorker(worker){
+        this.worker = worker
     }
 
     removeWorker(){
-        this.workerPresent = false;
+        this.worker = null;
     }
 
     //currently also the isMoveable
     isBuildable(){
         let output = true;
-        if(this.capped||this.workerPresent){
+        if(this.capped||this.workerPresent != null){
             output = false;
         }
         return output;
     }
 
+    //assumes that the build has been validated
     buildFloor(){
         if((this.topLevel+1)===4){
             this.topLevel = FLOOR.DOME;
@@ -38,7 +39,7 @@ export default class Tile {
     }
 
     hasWorkerWon(){
-        return this.workerPresent && this.topLevel === FLOOR.L_THREE;
+        return this.worker === null && this.topLevel === FLOOR.L_THREE;
     }
 
     //uncaping requires memory of previos top floor

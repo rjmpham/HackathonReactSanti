@@ -3,8 +3,8 @@ export default class Player{
     moveDistance = 1;
 
     //creates a new worker at the target position, but does not update the gameState.
-    placeWorker(gender, position){
-        this.workers.push(new Worker(gender, position));
+    placeWorker(position){
+        this.workers.push(new Worker(position));
     }
 
     //updates the workers position, but not the gameState (UNLESS THE PLAYER WON.)
