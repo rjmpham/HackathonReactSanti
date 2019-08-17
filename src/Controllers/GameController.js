@@ -9,12 +9,12 @@ export default class GameController{
     workerNeedsToMove = false;
     
     gameState = null;
-    availableWorkerMoves = [];
+    
     
     constructor(){
         this.gameState = new GameState(5);
-        this.player_1 = new Player();
-        this.player_2 = new Player();
+        this.player_1 = new Player(this.gameState);
+        this.player_2 = new Player(this.gameState);
         this.activePlayer = this.player_1;
     }
 
@@ -65,8 +65,17 @@ export default class GameController{
         console.log('Game over!');
     }
 
+    //assumes a worker is selected 
     handleWorkerMovement(position){
-        return false;
+        let selectedWorkerPosition = this.gameState.selectedWorker.position;
+        
+        if(this.activePlayer.verifyMove(selectedWorkerPosition, position)){
+            console.log('Moving worker to ' + position.toString());
+        }
+
+
+        console.log("Cannot move worker to that location.");
+        return true;
     }
 
     handleWorkerSelection(position){
@@ -84,6 +93,7 @@ export default class GameController{
         if(this.activePlayer.hasWorkerAtPosition(position)){
             console.log('The user has selected their worker');
             this.gameState.selectedWorker = selectedWorker;
+            this.workerNeedsToMove = true;
             return false;
         }
 

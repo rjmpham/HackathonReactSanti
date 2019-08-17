@@ -1,9 +1,14 @@
 import Worker from '../Model/Worker.js';
 import Vector2 from '../Model/Vector2.js';
+import Tile from '../Model/Tile.js';
 
 export default class Player{
     workers = []
     moveDistance = 1;
+
+    constructor(gameState){
+        this.gameState = gameState;
+    }
 
     //creates a new worker at the target position, but does not update the gameState.
     placeWorker(position){
@@ -22,9 +27,10 @@ export default class Player{
     }
 
     //gets all valid moves as an array of Vector2s, of the valid moves for a given worker.
-    getAllValidWorkerMoves(worker){
-        let workerTile = this.gameState.getTile(worker.position);
-        let localNine = this.gameState.getLocalNine(worker.position);
+    getAllValidWorkerMoves(position){
+        let workerTile = this.gameState.getTile(position);
+        let localNine = this.gameState.getLocalNine(position);
+        console.log("is it a  tile " + (localNine[0] instanceof Tile));
         localNine = localNine.filter(tile => tile.isBuildable()); //filter out all capped and worker filled tiles
         localNine = localNine.filter(tile => tile.topLevel <= workerTile.topLevel+1); //filter out all tiles that are too high
         
@@ -39,8 +45,8 @@ export default class Player{
     }
 
     //verifies that a given position is a valid move location for a given worker
-    verifyMove(worker, targetPosition){
-        return this.getAllValidMoves(worker.position).includes(targetPosition);
+    verifyMove(workerPosition, targetPosition){
+        return this.getAllValidWorkerMoves(workerPosition).includes(targetPosition);
     }
     
     //verifies that a given position is a valid build location for a given worker
@@ -49,17 +55,19 @@ export default class Player{
     }
 
     hasWorkerAtPosition(position){
-      
+        let foundMatch = false;
         this.workers.forEach(x => {
+            
             if(x.position.equals(position)){
                 console.log("returning true.");
 
-                return true;
+                foundMatch = true;
             }
+            
         });
 
         console.log("How did this return false?");
-        return false;
+        return foundMatch;
     }
 
     reset(){
