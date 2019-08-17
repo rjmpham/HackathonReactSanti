@@ -1,10 +1,10 @@
-import {FLOOR} from './Floor.js' 
-import Vector2 from './Vector2.js'
+import {FLOOR} from './Floor.js';
+import Vector2 from './Vector2.js';
 export default class Tile {
     description = 'This is a tile!';
     topLevel = FLOOR.GROUND;
     capped = false;
-    worker = '';
+    worker = null;
     gridLocation;
     isHighlighted = false;
 
@@ -13,7 +13,7 @@ export default class Tile {
     }
 
     moveWorker(worker){
-        this.worker = worker
+        this.worker = worker;
     }
 
     removeWorker(){
@@ -42,6 +42,17 @@ export default class Tile {
     hasWorkerWon(){
         return this.worker === null && this.topLevel === FLOOR.L_THREE;
     }
+
+    getIndicator(){
+        return this.worker.getIndicator();
+    }
+
+    reset(){
+        this.topLevel = FLOOR.GROUND;
+        this.capped = false;
+        this.worker = null;
+    }
+
 
     //uncaping requires memory of previos top floor
 

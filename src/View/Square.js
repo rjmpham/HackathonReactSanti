@@ -2,18 +2,17 @@ import React from 'react';
 
 export default class Square extends React.Component{
     constructor(props) {
-        super(props)
-    
+        super(props);
         this.state = {
             displayLevel: this.props.gameState.getTile(this.props.position).topLevel,
             worker: ''
-        }
+        };
     }
 
     handleClick(){
         this.props.onClick(this.props.position);
         this.setState({displayLevel : this.props.gameState.getTile(this.props.position).topLevel});
-        if( this.props.gameState.getTile(this.props.position).worker !=null){
+        if( this.props.gameState.getTile(this.props.position).worker !==null){
             this.setState({worker :this.props.gameState.getTile(this.props.position).worker.indicator});
         } else {
             this.setState({worker :''});
@@ -21,7 +20,7 @@ export default class Square extends React.Component{
     }
     
     //pros.value is a Vector2 of the board position
-    render(props){
+    render(){
         return (
             <button className="square" onClick={() => this.handleClick()}>
                 <div className= "buildRow">   

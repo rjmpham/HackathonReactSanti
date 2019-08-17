@@ -1,16 +1,20 @@
 import Player from './Player';
-import Worker from "../Model/Worker";
-import { nullLiteral } from '@babel/types';
-import Vector2 from '../Model/Vector2';
+import GameState from '../Model/GameState';
 
 export default class GameController{
     
     activePlayer = null;
+    isInSetup = true;
+    needsToSelectWorker = false;
+    workerNeedsToMove = false;
     
-    constructor(gameState){
-        this.gameState = gameState;
-        this.player_1 = new Player();
-        this.player_2 = new Player();
+    gameState = null;
+    
+    
+    constructor(){
+        this.gameState = new GameState(5);
+        this.player_1 = new Player(this.gameState);
+        this.player_2 = new Player(this.gameState);
         this.activePlayer = this.player_1;
     }
 
@@ -21,6 +25,10 @@ export default class GameController{
     //This is where the game loop should be!
     beginTurn(){
 
+    }
+
+    getGameState(){
+        return this.gameState;
     }
 
     moveWorker(workerPosition, targetPosition){
@@ -48,51 +56,127 @@ export default class GameController{
     
 
     newGame(){
-        this.buildFloor(new Vector2(0, 0));
-        console.log(this.gameState.getTile(new Vector2(0, 0)).topLevel);
+        this.gameState.reset();
+        this.activePlayer = this.player_1;
+        console.log('Created a new game.');
     }
 
     endGame(){
         console.log('Game over!');
     }
 
-    handleBoardClick(position){
-        //check to see if the tile has a worker on it.
-
-        // let workerOnTile = this.gameState.getTile(position).worker
-        // if(workerOnTile === null)
-        // {
-        //     //is it their worker?
-        //     if(this.activePlayer.hasWorkerAtPosition(position)){
-        //         this.highlightWorkerMoves(workerOnTile);
-        //         this.selectedWorker = workerOnTile;
-        //     }
-        // }
-        this.buildFloor(position);
-        console.log(this.gameState.getTile(position).topLevel + ' at ' + position.x +  position.y);
-    }
-
-
-    
-    handleWorkerSelection(position){
-        let workerOnTile = this.gameState.getTile(position).worker;
-        if(workerOnTile == null){
-
+    //assumes a worker is selected 
+    handleWorkerMovement(position){
+        let selectedWorkerPosition = this.gameState.selectedWorker.position;
+        
+        if(this.activePlayer.verifyMove(selectedWorkerPosition, position)){
+            console.log('Moving worker to ' + position.toString());
         }
-            //clearWorkerMovesHighlighitng();
+
+
+        console.log('Cannot move worker to that location.');
+        return true;
     }
 
-    clearWorkerMovesHighlighitng(){
+    handleWorkerSelection(position){
+        let clickedTile = this.gameState.getTile(position);
+        
+        //there is no worker on the clicked tile
+        if(clickedTile.worker === null){
+            console.log('Selected a tile without a worker.');
+            return true;
+        }
 
+        //they have selected a worker. But is it theirs?
+        let selectedWorker = clickedTile.worker;
+        //console.log("I recieved " +this.activePlayer.hasWorkerAtPosition(position) );
+        if(this.activePlayer.hasWorkerAtPosition(position)){
+            console.log('The user has selected their worker');
+            this.gameState.selectedWorker = selectedWorker;
+            this.workerNeedsToMove = true;
+            return false;
+        }
+
+        console.log('The user has selected a worker that was not their own.');
+        //they have selected a worker that is not their own.
+        return true;
+    }
+
+    handleBoardClick(position){
+        console.log('It is ' + ((this.activePlayer === this.player_1)? 'player 1s' : 'player 2s') + ' turn.');
+
+
+        //do we need to place workers?
+        if(this.isInSetup){
+            console.log('We are in setup.');
+            this.isInSetup = this.handleSetup(position);
+            return;
+        }
+
+        
+        if(this.needsToSelectWorker){
+            console.log('We are in needs to select.');
+            this.needsToSelectWorker = this.handleWorkerSelection(position);
+            return;
+        }
+
+        if(this.workerNeedsToMove){
+            console.log('We are in needs to needs to move.');
+            this.workerNeedsToMove = this.handleWorkerMovement(position);
+        }
+
+       
+    }
+
+    handleSetup(position){
+        let clickedTile = this.gameState.getTile(position);
+
+        //Do both players have 2 workers?
+        // if(this.player_1.workers.length === 2 && this.player_2.workers.length ===2)
+        // {
+        //     this.isInSetup = false;
+        //     console.log("Setup has finished.");
+        //     return false;
+        // }
+
+        //Can't place a worker on top of another.
+        if(clickedTile.worker !== null){
+            console.log('Cannot place worker, tile is occupied.');
+            return true;
+        }
+         
+
+        //player 1 places their worker.
+        if(this.player_1.workers.length < 2){
+            clickedTile.worker = (this.player_1.placeWorker(position));
+            console.log('Player 1 has placed a worker.');
+            return true;
+        }
+
+
+        //player 2 places their worker
+        if(this.player_2.workers.length < 2){
+            clickedTile.moveWorker(this.player_2.placeWorker(position));
+            console.log('Player 2 has placed a worker.');
+            // first check for finished setup
+            
+           
+            if(this.player_2.workers.length === 2){
+                this.needsToSelectWorker = true;
+                console.log('Both players have placed their pieces.');
+                return false;
+            }
+                
+            
+            return true;
+        }
+          
+        
     }
     
+
+
     
-    highlightWorkerMoves(worker){
-        let workerMoves = this.activePlayer.getAllValidWOrkerMoves(worker);
-        workerMoves.forEach(position => {
-            this.gameState.getTile(position).isHighlighted = true;
-        });
-    }
 
 
 }
