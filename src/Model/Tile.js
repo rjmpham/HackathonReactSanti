@@ -30,7 +30,7 @@ export default class Tile {
 
     buildFloor(){
         if((this.topLevel+1)===4){
-            this.topLevel+=1;
+            this.topLevel = FLOOR.DOME;
             this.capped = true;
         } else {
             this.topLevel+=1;
