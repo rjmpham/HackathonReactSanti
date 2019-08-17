@@ -20,7 +20,7 @@ export default class Square extends React.Component{
             <button className="square" onClick={() => this.handleClick()}>
                 <div className= "buildRow">   
                     <div className= "buildDisplay"> 
-                        {this.displayLevel} 
+                        {this.state.displayLevel} 
                     </div>
                     <div className= "buildSpace"> </div>
                     <div className= "buildDisplay"> </div>
