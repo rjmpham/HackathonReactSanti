@@ -1,3 +1,5 @@
+import Worker from '../Model/Worker.js';
+
 export default class Player{
     workers = []
     moveDistance = 1;
@@ -7,6 +9,7 @@ export default class Player{
         let newWorker = new Worker(position, this)
         this.workers.push(newWorker);
         console.log("Placed worker at " + position);
+        
         return newWorker;
     }
 

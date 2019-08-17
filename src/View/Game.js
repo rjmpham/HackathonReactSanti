@@ -7,8 +7,7 @@ import GameState from "../Model/GameState.js";
 export default class Game extends React.Component {
     constructor(props) {
       super(props);
-      this.gameState = new GameState(5);
-      this.controller = new Controller(this.gameState);
+      this.controller = new Controller();
     }
 
     handleBoardClick(i){
@@ -25,7 +24,7 @@ export default class Game extends React.Component {
           <div className="game-board">
                 <Board 
                     onClick={(i) => this.handleBoardClick(i)}
-                    gameState={this.gameState}
+                    gameState={this.controller.getGameState()}
                 />
           </div>
           <div className="control-panel">
