@@ -1,25 +1,21 @@
 import Player from './Player';
 import Worker from "../Model/Worker";
+import { nullLiteral } from '@babel/types';
 import Vector2 from '../Model/Vector2';
 
 export default class GameController{
-	constructor(gameState){
+    
+    activePlayer = null;
+    
+    constructor(gameState){
         this.gameState = gameState;
         this.player_1 = new Player();
         this.player_2 = new Player();
+        this.activePlayer = this.player_1;
     }
 
-    newGame() {
-        for (var i = 0; i < 4; i++) {
-            let x = Math.round(Math.random() * 4);
-            let y = Math.round(Math.random() * 4);
-            this.placeWorker(null, new Vector2(x, y), this.players[i % 2]);
-        }
-    }
-
-    placeWorker(gender, position, player) {
-        player.workers.push(new Worker(gender, position));
-        console.log(player.workers)
+    placeWorker(position) {
+        this.activePlayer.placeWorker(position);
     }
     
     //This is where the game loop should be!
@@ -50,6 +46,55 @@ export default class GameController{
         //Updates the view, based on what the player is allowed to do.
     }
     
+
+    newGame(){
+        this.buildFloor(new Vector2(0, 0));
+        console.log(this.gameState.getTile(new Vector2(0, 0)).topLevel);
+    }
+
+    endGame(){
+        console.log('Game over!');
+    }
+
+    handleBoardClick(position){
+        //check to see if the tile has a worker on it.
+
+        // let workerOnTile = this.gameState.getTile(position).worker
+        // if(workerOnTile === null)
+        // {
+        //     //is it their worker?
+        //     if(this.activePlayer.hasWorkerAtPosition(position)){
+        //         this.highlightWorkerMoves(workerOnTile);
+        //         this.selectedWorker = workerOnTile;
+        //     }
+        // }
+        this.buildFloor(position);
+        console.log(this.gameState.getTile(position).topLevel + ' at ' + position.x +  position.y);
+    }
+
+
+    
+    handleWorkerSelection(position){
+        let workerOnTile = this.gameState.getTile(position).worker;
+        if(workerOnTile == null){
+
+        }
+            //clearWorkerMovesHighlighitng();
+    }
+
+    clearWorkerMovesHighlighitng(){
+
+    }
+    
+    
+    highlightWorkerMoves(worker){
+        let workerMoves = this.activePlayer.getAllValidWOrkerMoves(worker);
+        workerMoves.forEach(position => {
+            this.gameState.getTile(position).isHighlighted = true;
+        });
+    }
+
+
 }
 
 

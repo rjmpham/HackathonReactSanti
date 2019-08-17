@@ -11,8 +11,11 @@ export default class Game extends React.Component {
     }
 
     handleBoardClick(i){
-        //this.controller.handleBoardClick(i);
+        this.controller.handleBoardClick(i);
     }
+
+
+
 
     render() {    
       return (
@@ -25,9 +28,9 @@ export default class Game extends React.Component {
           </div>
           <div className="game-info">
             <button onClick={() => this.controller.newGame()}>New Game</button>
-            <button>Move</button>
+            {/* <button>Move</button>
             <button>Build</button>
-            <button>Undo</button>
+            <button>Undo</button>*/}
           </div>
           <div className="move-info">
           </div>

@@ -3,8 +3,8 @@ export default class Player{
     moveDistance = 1;
 
     //creates a new worker at the target position, but does not update the gameState.
-    placeWorker(gender, position){
-        this.workers.push(new Worker(gender, position));
+    placeWorker(position){
+        this.workers.push(new Worker(position));
     }
 
     //updates the workers position, but not the gameState (UNLESS THE PLAYER WON.)
@@ -39,6 +39,10 @@ export default class Player{
     //verifies that a given position is a valid build location for a given worker
 	verifyBuildAt(worker, targetPosition){
 		return this.getAllValidBuildLocations(worker.position).includes(targetPosition);
+    }
+
+    hasWorkerAtPosition(position){
+        return this.workers.includes(x => x.position === position);
     }
 
 
