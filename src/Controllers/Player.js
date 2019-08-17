@@ -1,4 +1,5 @@
 import Worker from '../Model/Worker.js';
+// eslint-disable-next-line no-unused-vars
 import Vector2 from '../Model/Vector2.js';
 import Tile from '../Model/Tile.js';
 
@@ -30,7 +31,7 @@ export default class Player{
     getAllValidWorkerMoves(position){
         let workerTile = this.gameState.getTile(position);
         let localNine = this.gameState.getLocalNine(position);
-        console.log(localNine);
+        localNine.forEach(x => console.log(x));
         localNine = localNine.filter(tile => tile.isBuildable()); //filter out all capped and worker filled tiles
         localNine = localNine.filter(tile => tile.topLevel <= workerTile.topLevel+1); //filter out all tiles that are too high
         
@@ -40,6 +41,7 @@ export default class Player{
     //gets all valid build locations as an array of Vector2s, of the valid moves for a given worker.
     getAllValidBuildLocations(worker){
         let localNine = this.gameState.getWorkerLocalNine(worker.position);
+        localNine.forEach(x => console.log(x));
         localNine = localNine.filter(tile => tile.isBuildable()); //filter out all capped and worker filled tiles
         return localNine.map(tile => tile.position);
     }
@@ -59,14 +61,14 @@ export default class Player{
         this.workers.forEach(x => {
             
             if(x.position.equals(position)){
-                console.log("returning true.");
+                console.log('returning true.');
 
                 foundMatch = true;
             }
             
         });
 
-        console.log("How did this return false?");
+        console.log('How did this return false?');
         return foundMatch;
     }
 

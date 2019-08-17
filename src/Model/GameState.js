@@ -39,12 +39,17 @@ export default class GameState{
             for(let dy = -1; dy <= 1; dy++){
                 let tx = position.x + dx ;
                 let ty = position.y + dy;
-                if(tx >= 0 && tx <= this.boardSize){
-                    if(ty >= 0 && tx <= this.boardSize){
+                if(tx >= 0 && tx < this.boardSize){
+                    if(ty >= 0 && ty < this.boardSize){
+                        console.log('Adding tile at (' + tx + ', ' + ty + ').');
                         if(!this.boardState[tx][ty] === undefined){
-                            console.log("pushing undefined to local 9.");
+                            console.log('Attempted to push undefined to local 9.');
                         }
-                        localNine.push(this.boardState[tx] [ty]);
+                        else{
+                            localNine.push(this.boardState[tx] [ty]);
+                        }
+                        
+                        
                         
                     }
                 }
@@ -95,13 +100,13 @@ export default class GameState{
        
        
         
-		for(let x = 0; x < this.boardState[0].length; x++){
-			for(let y = 0; y < this.boardState[x].length; y++){
-				this.boardState[x][y].reset();
-			}
-		}
+        for(let x = 0; x < this.boardState[0].length; x++){
+            for(let y = 0; y < this.boardState[x].length; y++){
+                this.boardState[x][y].reset();
+            }
+        }
         
-       this.playerList.forEach(x => x.reset());
+        this.playerList.forEach(x => x.reset());
         this.activePlayer = this.playerList[0];
         
     }

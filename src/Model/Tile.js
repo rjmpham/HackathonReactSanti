@@ -10,6 +10,7 @@ export default class Tile {
 
     constructor(x,y){
         this.gridLocation = new Vector2(x,y);
+        this.description += this.gridLocation.toString();
     }
 
     moveWorker(worker){

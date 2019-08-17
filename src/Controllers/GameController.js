@@ -74,7 +74,7 @@ export default class GameController{
         }
 
 
-        console.log("Cannot move worker to that location.");
+        console.log('Cannot move worker to that location.');
         return true;
     }
 
@@ -108,20 +108,20 @@ export default class GameController{
 
         //do we need to place workers?
         if(this.isInSetup){
-            console.log("We are in setup.");
+            console.log('We are in setup.');
             this.isInSetup = this.handleSetup(position);
             return;
         }
 
         
         if(this.needsToSelectWorker){
-            console.log("We are in needs to select.");
+            console.log('We are in needs to select.');
             this.needsToSelectWorker = this.handleWorkerSelection(position);
             return;
         }
 
         if(this.workerNeedsToMove){
-            console.log("We are in needs to needs to move.");
+            console.log('We are in needs to needs to move.');
             this.workerNeedsToMove = this.handleWorkerMovement(position);
         }
 
@@ -149,7 +149,7 @@ export default class GameController{
         //player 1 places their worker.
         if(this.player_1.workers.length < 2){
             clickedTile.worker = (this.player_1.placeWorker(position));
-            console.log("Player 1 has placed a worker.");
+            console.log('Player 1 has placed a worker.');
             return true;
         }
 
@@ -157,7 +157,7 @@ export default class GameController{
         //player 2 places their worker
         if(this.player_2.workers.length < 2){
             clickedTile.moveWorker(this.player_2.placeWorker(position));
-            console.log("Player 2 has placed a worker.");
+            console.log('Player 2 has placed a worker.');
             // first check for finished setup
             
            
