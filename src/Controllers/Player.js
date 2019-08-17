@@ -4,7 +4,10 @@ export default class Player{
 
     //creates a new worker at the target position, but does not update the gameState.
     placeWorker(position){
-        this.workers.push(new Worker(position));
+        let newWorker = new Worker(position, this)
+        this.workers.push(newWorker);
+        console.log("Placed worker at " + position);
+        return newWorker;
     }
 
     //updates the workers position, but not the gameState (UNLESS THE PLAYER WON.)

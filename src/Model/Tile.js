@@ -4,7 +4,7 @@ export default class Tile {
     description = 'This is a tile!';
     topLevel = FLOOR.GROUND;
     capped = false;
-    worker = '';
+    worker = null;
     gridLocation;
     isHighlighted = false;
 

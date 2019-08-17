@@ -6,6 +6,8 @@ import Vector2 from '../Model/Vector2';
 export default class GameController{
     
     activePlayer = null;
+    isInSetup = true;
+    
     
     constructor(gameState){
         this.gameState = gameState;
@@ -57,7 +59,17 @@ export default class GameController{
     }
 
     handleBoardClick(position){
-        this.handleWorkerSelection(position);
+        let clickedTile = this.gameState.getTile(position);
+
+
+        //do we need to place workers?
+        if(this.isInSetup){
+
+            this.isInSetup = this.handleSetup(position);
+
+        }
+        
+        //this.handleWorkerSelection(position);
         //check to see if the tile has a worker on it.
 
         // let workerOnTile = this.gameState.getTile(position).worker
@@ -69,11 +81,45 @@ export default class GameController{
         //         this.selectedWorker = workerOnTile;
         //     }
         // }
-        this.buildFloor(position);
-        console.log(this.gameState.getTile(position).topLevel + ' at ' + position.x +  position.y);
+        //this.buildFloor(position);
+        //console.log(this.gameState.getTile(position).topLevel + ' at ' + position.x +  position.y);
     }
 
+    handleSetup(position){
+        let clickedTile = this.gameState.getTile(position);
 
+        //Do both players have 2 workers?
+        if(this.player_1.workers.length === 2 && this.player_2.workers.length ===2)
+        {
+            this.isInSetup = false;
+            console.log("Setup has finished.");
+            return;
+        }
+
+        //Can't place a worker on top of another.
+        if(clickedTile.worker !== null){
+            console.log("Cannot place worker, tile is occupied.");
+            return;
+        }
+         
+
+        //player 1 places their worker.
+        if(this.player_1.workers.length < 2){
+            clickedTile.worker = this.player_1.placeWorker(position);
+            this.gameState.setTile(position, clickedTile);
+            return;
+        }
+
+
+        //player 2 places their worker
+        if(this.player_2.workers.length < 2){
+            clickedTile.worker = this.player_2.placeWorker(position);
+            this.gameState.setTile(position, clickedTile);
+            return;
+        }
+          
+        
+    }
     
     handleWorkerSelection(position){
         let selectedWorker = this.gameState.getTile(position).worker;

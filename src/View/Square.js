@@ -12,8 +12,12 @@ export default class Square extends React.Component{
 
     handleClick(){
         this.props.onClick(this.props.position);
+        console.log("What is null?");
+        console.log(this.props.gameState);
+        console.log(this.props.position);
+        console.log(this.props.gameState.getTile(this.props.position));
         this.setState({displayLevel : this.props.gameState.getTile(this.props.position).topLevel});
-        if( this.props.gameState.getTile(this.props.position).worker !=null){
+        if( this.props.gameState.getTile(this.props.position).worker !==null){
             this.setState({worker :this.props.gameState.getTile(this.props.position).worker.indicator});
         } else {
             this.setState({worker :''});

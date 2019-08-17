@@ -82,6 +82,10 @@ export default class GameState{
             this.boardState.getTile(position).isHighlighted = false;
         });
     }
+
+    setTile(position, tile){
+        this.boardState[position.x, position.y] = tile;
+    }
     
    
 }
