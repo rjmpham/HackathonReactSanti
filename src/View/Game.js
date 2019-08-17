@@ -27,13 +27,13 @@ export default class Game extends React.Component {
                 <div className="game-board">
                     <Board 
                         onClick={(i) => this.handleBoardClick(i)}
-                        gameState={this.gameState}
+                        gameState={this.controller.getGameState()}
                     />
                 </div>
                 <div className="control-panel">
                     <ControlPanel                    
                         onClick={(i) => this.handleControlClick(i)}
-                        gameState={this.gameState}
+                        gameState={this.controller.getGameState()}
                     />
                 </div>
             </div>
