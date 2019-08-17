@@ -68,6 +68,10 @@ export default class GameController{
             this.isInSetup = this.handleSetup(position);
 
         }
+        if(this.isInSetup)
+            return;
+
+        //GO TO GAMELOOP
         
         //this.handleWorkerSelection(position);
         //check to see if the tile has a worker on it.
@@ -81,7 +85,7 @@ export default class GameController{
         //         this.selectedWorker = workerOnTile;
         //     }
         // }
-        this.buildFloor(position);
+        //this.buildFloor(position);
         //console.log(this.gameState.getTile(position).topLevel + ' at ' + position.x +  position.y);
     }
 
@@ -93,29 +97,35 @@ export default class GameController{
         {
             this.isInSetup = false;
             console.log("Setup has finished.");
-            return;
+            return false;
         }
 
         //Can't place a worker on top of another.
         if(clickedTile.worker !== null){
             console.log("Cannot place worker, tile is occupied.");
-            return;
+            return true;
         }
          
 
         //player 1 places their worker.
         if(this.player_1.workers.length < 2){
-            clickedTile.worker = this.player_1.placeWorker(position);
-            this.gameState.setTile(position, clickedTile);
-            return;
+            clickedTile.worker = (this.player_1.placeWorker(position));
+            console.log(clickedTile.worker.logSomething());
+            console.log("Has tile ref updated?"  + this.gameState.getTile(position).worker);
+            //this.gameState.setTile(position, clickedTile);
+            return true;
         }
 
 
         //player 2 places their worker
         if(this.player_2.workers.length < 2){
-            clickedTile.worker = this.player_2.placeWorker(position);
-            this.gameState.setTile(position, clickedTile);
-            return;
+            clickedTile.moveWorker(this.player_2.placeWorker(position));
+            console.log("Has tile ref updated?"  + this.gameState.getTile(position).worker);
+            //this.gameState.setTile(position, clickedTile);
+
+            // first check for finished setup
+            // if(2) then return false;
+            return true;
         }
           
         

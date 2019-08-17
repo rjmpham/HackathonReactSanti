@@ -43,6 +43,11 @@ export default class Tile {
         return this.worker === null && this.topLevel === FLOOR.L_THREE;
     }
 
+    getIndicator(){
+        return this.worker.getIndicator();
+    }
+
+
     //uncaping requires memory of previos top floor
 
     //overide floor can accept something and set topLevel for future changes.
