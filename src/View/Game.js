@@ -10,12 +10,18 @@ export default class Game extends React.Component {
       this.controller = new Controller(this.gameState);
     }
 
+    handleBoardClick(i){
+        //this.controller.handleBoardClick(i);
+    }
+
+
+
     render() {    
       return (
         <div className="game">
           <div className="game-board">
             <Board 
-                onClick={(i) => this.handleClick(i)}
+                onClick={(i) => this.handleBoardClick(i)}
                 gameState={this.gameState}
             />
           </div>
