@@ -66,8 +66,6 @@ export default class Player{
             }
             
         });
-
-        console.log('How did this return false?');
         return foundMatch;
     }
 

@@ -51,6 +51,7 @@ export default class Tile {
         this.topLevel = FLOOR.GROUND;
         this.capped = false;
         this.worker = null;
+        this.isHighlighted = false;
     }
 
 
