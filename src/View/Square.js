@@ -15,7 +15,7 @@ export default class Square extends React.Component{
         this.props.onClick(this.props.position);
         this.setState({displayLevel : this.props.gameState.getTile(this.props.position).topLevel});
         if( this.props.gameState.getTile(this.props.position).worker !==null){
-            this.setState({worker :this.props.gameState.getTile(this.props.position).worker.getIndicator()});
+            this.setState({worker :this.props.gameState.getTile(this.props.position).worker.indicator});
         } else {
             this.setState({worker :''});
         }
