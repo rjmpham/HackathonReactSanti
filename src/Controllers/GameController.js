@@ -1,14 +1,15 @@
 import Player from './Player';
-import Worker from "../Model/Worker";
-import { nullLiteral } from '@babel/types';
-import Vector2 from '../Model/Vector2';
 import GameState from '../Model/GameState';
 
 export default class GameController{
     
     activePlayer = null;
     isInSetup = true;
+    needsToSelectWorker = false;
+    workerNeedsToMove = false;
+    
     gameState = null;
+    availableWorkerMoves = [];
     
     constructor(){
         this.gameState = new GameState(5);
@@ -57,23 +58,57 @@ export default class GameController{
     newGame(){
         this.gameState.reset();
         this.activePlayer = this.player_1;
-        console.log("Created a new game.");
+        console.log('Created a new game.');
     }
 
     endGame(){
         console.log('Game over!');
     }
 
-    handleBoardClick(position){
+    handleWorkerMovement(position){
+        
+    }
+
+    handleWorkerSelection(position){
         let clickedTile = this.gameState.getTile(position);
+        
+        let selectedWorker = this.gameState.selectedWorker;
+        if(this.activePlayer.workers.include(x => x=== selectedWorker)){
+            console.log("The user has selected another player's worker.");
+            return true;
+        }
+
+        //they have not selected a worker.
+        if(selectedWorker === null){
+           return true;
+        }
+
+        this.gameState.selectedWorker = selectedWorker;
+        return false;
+    }
+
+    handleBoardClick(position){
+        
 
 
         //do we need to place workers?
         if(this.isInSetup){
 
             this.isInSetup = this.handleSetup(position);
-
+            return;
         }
+
+        
+        if(this.needsToSelectWorker){
+            this.needsToSelectWorker = this.handleWorkerSelection(position);
+            return;
+        }
+
+        if(this.workerNeedsToMove){
+            this.workerNeedsToMove = this.handleWorkerMovement(position);
+        }
+
+        //
         
 
         //GO TO GAMELOOP
@@ -123,12 +158,13 @@ export default class GameController{
         //player 2 places their worker
         if(this.player_2.workers.length < 2){
             clickedTile.moveWorker(this.player_2.placeWorker(position));
-            console.log("Has tile ref updated?"  + this.gameState.getTile(position).worker);
-            //this.gameState.setTile(position, clickedTile);
 
             // first check for finished setup
-            if(this.player_2.length === 2)
+            if(this.player_2.length === 2){
+                this.workerNeedsToMove = true;
                 return false;
+            }
+                
             
             return true;
         }
@@ -146,20 +182,10 @@ export default class GameController{
         else{
             this.gameState.clearHighlightedTiles();
         }
-            //clearWorkerMovesHighlighitng();
+        //clearWorkerMovesHighlighitng();
     }
 
-    clearWorkerMovesHighlighitng(){
-
-    }
     
-    
-    highlightWorkerMoves(worker){
-        let workerMoves = this.activePlayer.getAllValidWOrkerMoves(worker);
-        workerMoves.forEach(position => {
-            this.gameState.getTile(position).isHighlighted = true;
-        });
-    }
 
 
 }

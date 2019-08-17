@@ -6,9 +6,9 @@ export default class Player{
 
     //creates a new worker at the target position, but does not update the gameState.
     placeWorker(position){
-        let newWorker = new Worker(position, this)
+        let newWorker = new Worker(position, this);
         this.workers.push(newWorker);
-        console.log("Placed worker at " + position);
+        console.log('Placed worker at ' + position);
         
         return newWorker;
     }
@@ -30,7 +30,7 @@ export default class Player{
         return localNine.map(tile => tile.position);
     }
 
-     //gets all valid build locations as an array of Vector2s, of the valid moves for a given worker.
+    //gets all valid build locations as an array of Vector2s, of the valid moves for a given worker.
     getAllValidBuildLocations(worker){
         let localNine = this.gameState.getWorkerLocalNine(worker.position);
         localNine = localNine.filter(tile => tile.isBuildable()); //filter out all capped and worker filled tiles
@@ -40,11 +40,11 @@ export default class Player{
     //verifies that a given position is a valid move location for a given worker
     verifyMove(worker, targetPosition){
         return this.getAllValidMoves(worker.position).includes(targetPosition);
-	}
+    }
     
     //verifies that a given position is a valid build location for a given worker
-	verifyBuildAt(worker, targetPosition){
-		return this.getAllValidBuildLocations(worker.position).includes(targetPosition);
+    verifyBuildAt(worker, targetPosition){
+        return this.getAllValidBuildLocations(worker.position).includes(targetPosition);
     }
 
     hasWorkerAtPosition(position){
