@@ -2,9 +2,8 @@ import React from 'react';
 
 export default class Square extends React.Component{
     constructor(props) {
-        super(props)
-    
-        console.log(this.props.gameState);
+        super(props);
+
         this.state = {
             displayLevel: this.props.gameState.getTile(this.props.position).topLevel,
             worker: ''
@@ -17,7 +16,6 @@ export default class Square extends React.Component{
         if( this.props.gameState.getTile(this.props.position).worker !==null){
             this.setState({worker :this.props.gameState.getTile(this.props.position).worker.getIndicator()});
         } else {
-            console.log("Am I printing empty?");
             this.setState({worker :''});
         }
     }

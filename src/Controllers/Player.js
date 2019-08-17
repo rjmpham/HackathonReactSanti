@@ -1,4 +1,5 @@
 import Worker from '../Model/Worker.js';
+import Vector2 from '../Model/Vector2.js';
 
 export default class Player{
     workers = []
@@ -48,12 +49,24 @@ export default class Player{
     }
 
     hasWorkerAtPosition(position){
-        return this.workers.includes(x => x.position === position);
+      
+        this.workers.forEach(x => {
+            if(x.position.equals(position)){
+                console.log("returning true.");
+
+                return true;
+            }
+        });
+
+        console.log("How did this return false?");
+        return false;
     }
 
     reset(){
         this.workers = [];
     }
+
+
 
 
 }
