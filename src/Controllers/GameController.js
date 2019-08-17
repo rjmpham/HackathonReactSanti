@@ -81,7 +81,7 @@ export default class GameController{
         //         this.selectedWorker = workerOnTile;
         //     }
         // }
-        //this.buildFloor(position);
+        this.buildFloor(position);
         //console.log(this.gameState.getTile(position).topLevel + ' at ' + position.x +  position.y);
     }
 
