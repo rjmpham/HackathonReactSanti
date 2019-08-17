@@ -30,7 +30,7 @@ export default class Game extends React.Component {
             <button onClick={() => this.controller.newGame()}>New Game</button>
             {/* <button>Move</button>
             <button>Build</button>
-            <button>Undo</button> */}
+            <button>Undo</button>*/}
           </div>
           <div className="move-info">
           </div>

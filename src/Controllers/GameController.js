@@ -6,7 +6,6 @@ import Vector2 from '../Model/Vector2';
 export default class GameController{
     
     activePlayer = null;
-    selectedWorker = null;
     
     constructor(gameState){
         this.gameState = gameState;
@@ -60,15 +59,17 @@ export default class GameController{
     handleBoardClick(position){
         //check to see if the tile has a worker on it.
 
-        let workerOnTile = this.gameState.getTile(position).worker
-        if(workerOnTile === null)
-        {
-            //is it their worker?
-            if(this.activePlayer.hasWorkerAtPosition(position)){
-                this.highlightWorkerMoves(workerOnTile);
-                this.selectedWorker = workerOnTile;
-            }
-        }
+        // let workerOnTile = this.gameState.getTile(position).worker
+        // if(workerOnTile === null)
+        // {
+        //     //is it their worker?
+        //     if(this.activePlayer.hasWorkerAtPosition(position)){
+        //         this.highlightWorkerMoves(workerOnTile);
+        //         this.selectedWorker = workerOnTile;
+        //     }
+        // }
+        this.buildFloor(position);
+        console.log(this.gameState.getTile(position).topLevel + ' at ' + position.x +  position.y);
     }
 
 
@@ -76,7 +77,7 @@ export default class GameController{
     handleWorkerSelection(position){
         let workerOnTile = this.gameState.getTile(position).worker;
         if(workerOnTile == null){
-            
+
         }
             //clearWorkerMovesHighlighitng();
     }
