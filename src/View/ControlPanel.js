@@ -1,10 +1,36 @@
 import React from 'react';
+import {CONTROLBUTTONS} from '../Model/ControlButtons.js' 
 
-function ControlPannel(){
-    let controlJSX = this.generateBoard();
+
+function ControlPannel(props){
+
+    function handleClick(i){
+        props.onClick(i);
+    }
+    
+
     return(
           <div>
-            {controlJSX}
+                <button 
+                    className="menuButton" 
+                    onClick={() => handleClick(CONTROLBUTTONS.PASS)}
+                > 
+                    Pass
+                </button>
+
+                <button 
+                    className="menuButton" 
+                    onClick={() => handleClick(CONTROLBUTTONS.UNDO)}
+                > 
+                    Undo
+                </button>
+                
+                <button 
+                    className="menuButton" 
+                    onClick={() => handleClick(CONTROLBUTTONS.NEWGAME)}
+                > 
+                    New Game
+                </button>
           </div>
     )
     

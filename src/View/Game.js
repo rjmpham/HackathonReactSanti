@@ -29,14 +29,10 @@ export default class Game extends React.Component {
                 />
           </div>
           <div className="control-panel">
-                {/*<ControlPanel                    
+                <ControlPanel                    
                     onClick={(i) => this.handleControlClick(i)}
                     gameState={this.gameState}
-                />*/}
-            <button onClick={() => this.controller.newGame()}>New Game</button>
-            {/* <button>Move</button>
-            <button>Build</button>
-            <button>Undo</button>*/}
+                />
           </div>
         </div>
       );
