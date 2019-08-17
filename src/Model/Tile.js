@@ -5,16 +5,17 @@ export default class Tile {
     topLevel = FLOOR.GROUND;
     capped = false;
     worker = null;
-    gridLocation;
+    position;
     isHighlighted = false;
 
     constructor(x,y){
-        this.gridLocation = new Vector2(x,y);
-        this.description += this.gridLocation.toString();
+        this.position = new Vector2(x,y);
+        this.description += this.position.toString();
     }
 
     moveWorker(worker){
         this.worker = worker;
+        console.log("Worker is now " + this.worker);
     }
 
     removeWorker(){
@@ -23,11 +24,8 @@ export default class Tile {
 
     //currently also the isMoveable
     isBuildable(){
-        let output = true;
-        if(this.capped||this.workerPresent != null){
-            output = false;
-        }
-        return output;
+        console.log((!this.capped) && (this.worker === null));
+        return (!this.capped) && (this.worker === null);
     }
 
     //assumes that the build has been validated

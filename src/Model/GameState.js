@@ -1,5 +1,6 @@
 import Tile from './Tile.js';
 import Player from '../Controllers/Player.js';
+import Worker from '../Model/Worker.js';
 
 export default class GameState{
     boardState = null;
@@ -41,9 +42,9 @@ export default class GameState{
                 let ty = position.y + dy;
                 if(tx >= 0 && tx < this.boardSize){
                     if(ty >= 0 && ty < this.boardSize){
-                        console.log('Adding tile at (' + tx + ', ' + ty + ').');
+                        //console.log('Adding tile at (' + tx + ', ' + ty + ').');
                         if(!this.boardState[tx][ty] === undefined){
-                            console.log('Attempted to push undefined to local 9.');
+                            console.error('Attempted to push undefined to local 9.');
                         }
                         else{
                             localNine.push(this.boardState[tx] [ty]);
@@ -68,8 +69,9 @@ export default class GameState{
     
     //update the boardState
     moveWorker(workerPosition, targetPosition){
-        this.boardState[workerPosition.x, workerPosition.y].moveWorker();
-        this.boardSize[targetPosition.x, targetPosition.y].removeWorker();
+        if(this.selectedWorker === null) console.error("There is no worker selected.");
+        this.boardState[targetPosition.x][targetPosition.y].moveWorker(this.selectedWorker);
+        this.boardState[workerPosition.x][workerPosition.y].removeWorker();
     }
 
     playerHasWon(){

@@ -22,33 +22,64 @@ export default class Player{
 
     //updates the workers position, but not the gameState (UNLESS THE PLAYER WON.)
     moveWorker(workerPosition, targetPosition){
-        this.workers.find(x => x.position === workerPosition).position = targetPosition;
+
+        for(let i =0; i < this.workers.length; i++){
+            let worker  = this.workers[i];
+            if(worker.position.equals(workerPosition)){
+                worker.position = targetPosition;
+            }
+        }
         if(this.gameState.getTile(workerPosition).hasWorkerWon())
             this.gameState.winner = this;
+    }
+
+    getWorkerAt(position){
+        for(let i =0; i < this.workers.length; i++){
+            let worker  = this.workers[i];
+            if(worker.position.equals(position)){
+                return worker;
+            }
+        }
     }
 
     //gets all valid moves as an array of Vector2s, of the valid moves for a given worker.
     getAllValidWorkerMoves(position){
         let workerTile = this.gameState.getTile(position);
         let localNine = this.gameState.getLocalNine(position);
-        localNine.forEach(x => console.log(x));
-        localNine = localNine.filter(tile => tile.isBuildable()); //filter out all capped and worker filled tiles
-        localNine = localNine.filter(tile => tile.topLevel <= workerTile.topLevel+1); //filter out all tiles that are too high
         
-        return localNine.map(tile => tile.position);
+        localNine = localNine.filter((tile) => {return tile.isBuildable();}); //filter out all capped and worker filled tiles
+        localNine = localNine.filter((tile) => {return tile.topLevel <= workerTile.topLevel+1;}); //filter out all tiles that are too high
+        // console.log('Available move tiles are: ');
+        // localNine.forEach(x => console.log(x));
+        
+        let validPositions = [];
+        for(let i =0; i < localNine.length; i++){
+            validPositions.push(localNine[i].position);
+        }
+        return validPositions;
     }
 
     //gets all valid build locations as an array of Vector2s, of the valid moves for a given worker.
     getAllValidBuildLocations(worker){
         let localNine = this.gameState.getWorkerLocalNine(worker.position);
-        localNine.forEach(x => console.log(x));
-        localNine = localNine.filter(tile => tile.isBuildable()); //filter out all capped and worker filled tiles
+        
+        localNine = localNine.filter((tile) => tile.isBuildable()); //filter out all capped and worker filled tiles
         return localNine.map(tile => tile.position);
     }
 
     //verifies that a given position is a valid move location for a given worker
     verifyMove(workerPosition, targetPosition){
-        return this.getAllValidWorkerMoves(workerPosition).includes(targetPosition);
+        let validMoves = this.getAllValidWorkerMoves(workerPosition);
+        validMoves.forEach(x => console.log(x));
+        let moveValid = false;
+        for(let i = 0; i < validMoves.length; i++){
+            if(validMoves[i].equals(targetPosition)){
+                console.log("The move is valid.");
+                moveValid = true;
+            }
+                
+        }
+        return moveValid;
     }
     
     //verifies that a given position is a valid build location for a given worker
@@ -59,16 +90,10 @@ export default class Player{
     hasWorkerAtPosition(position){
         let foundMatch = false;
         this.workers.forEach(x => {
-            
             if(x.position.equals(position)){
-                console.log('returning true.');
-
                 foundMatch = true;
             }
-            
         });
-
-        console.log('How did this return false?');
         return foundMatch;
     }
 

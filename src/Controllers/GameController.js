@@ -1,5 +1,6 @@
 import Player from './Player';
 import GameState from '../Model/GameState';
+import Worker from '../Model/Worker.js';
 
 export default class GameController{
     
@@ -7,6 +8,7 @@ export default class GameController{
     isInSetup = true;
     needsToSelectWorker = false;
     workerNeedsToMove = false;
+    needsToBuild = false;
     
     gameState = null;
     
@@ -36,6 +38,10 @@ export default class GameController{
         this.gameState.activePlayer.moveWorker(workerPosition, targetPosition); //update the worker state
         if(this.gameState.playerHasWon())
             this.gameOver();
+    }
+
+    gameOver(){
+
     }
 
     buildFloor(targetPosition){
@@ -69,12 +75,18 @@ export default class GameController{
     handleWorkerMovement(position){
         let selectedWorkerPosition = this.gameState.selectedWorker.position;
         
+
+
         if(this.activePlayer.verifyMove(selectedWorkerPosition, position)){
             console.log('Moving worker to ' + position.toString());
+            this.moveWorker(selectedWorkerPosition, position);
+
+            this.needsToBuild = true;
+            return false;
         }
 
 
-        console.log('Cannot move worker to that location.');
+        console.log("Cannot move worker to that location.");
         return true;
     }
 
@@ -108,20 +120,20 @@ export default class GameController{
 
         //do we need to place workers?
         if(this.isInSetup){
-            console.log('We are in setup.');
+            console.log("We are in setup.");
             this.isInSetup = this.handleSetup(position);
             return;
         }
 
         
         if(this.needsToSelectWorker){
-            console.log('We are in needs to select.');
+            console.log("We are in needs to select.");
             this.needsToSelectWorker = this.handleWorkerSelection(position);
             return;
         }
 
         if(this.workerNeedsToMove){
-            console.log('We are in needs to needs to move.');
+            console.log("We are in needs to needs to move.");
             this.workerNeedsToMove = this.handleWorkerMovement(position);
         }
 
@@ -149,7 +161,7 @@ export default class GameController{
         //player 1 places their worker.
         if(this.player_1.workers.length < 2){
             clickedTile.worker = (this.player_1.placeWorker(position));
-            console.log('Player 1 has placed a worker.');
+            console.log("Player 1 has placed a worker.");
             return true;
         }
 
@@ -157,7 +169,7 @@ export default class GameController{
         //player 2 places their worker
         if(this.player_2.workers.length < 2){
             clickedTile.moveWorker(this.player_2.placeWorker(position));
-            console.log('Player 2 has placed a worker.');
+            console.log("Player 2 has placed a worker.");
             // first check for finished setup
             
            
