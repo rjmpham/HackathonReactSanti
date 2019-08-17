@@ -4,18 +4,18 @@ export default class Square extends React.Component{
     constructor(props) {
         super(props)
     
-        console.log(this.props.controller);
+        console.log(this.props.gameState);
         this.state = {
-            displayLevel: this.props.controller.getGameState().getTile(this.props.position).topLevel,
+            displayLevel: this.props.gameState.getTile(this.props.position).topLevel,
             worker: ''
         }
     }
 
     handleClick(){
         this.props.onClick(this.props.position);
-        this.setState({displayLevel : this.props.controller.getGameState().getTile(this.props.position).topLevel});
+        this.setState({displayLevel : this.props.gameState.getTile(this.props.position).topLevel});
         if( this.props.gameState.getTile(this.props.position).worker !==null){
-            this.setState({worker :this.props.controller.getGameState().getTile(this.props.position).worker.getIndicator()});
+            this.setState({worker :this.props.gameState.getTile(this.props.position).worker.getIndicator()});
         } else {
             console.log("Am I printing empty?");
             this.setState({worker :''});

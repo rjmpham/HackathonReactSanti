@@ -59,6 +59,7 @@ export default class GameController{
         this.player_1 = new Player();
         this.player_2 = new Player();
         this.activePlayer = this.player_1;
+        console.log("Created a new game.");
     }
 
     endGame(){
