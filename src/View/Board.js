@@ -6,10 +6,20 @@ const BOARD_SIZE = 5;
 
 export default class Board extends React.Component {
 
+    constructor(props){
+        super(props);
+        this.squareElement = React.createRef();
+    }
+
+    updateSquare(){
+        this.squareElement.current.updateSelf();
+    }
+
     //takes a vector and assigns that vector to a square, also assigns an onclick method?
     renderSquare(i) {
         return (
             <Square 
+                ref = {this.squareElement}
                 position = {i}
                 gameState={this.props.gameState}
                 onClick={(i) => this.props.onClick(i)}
