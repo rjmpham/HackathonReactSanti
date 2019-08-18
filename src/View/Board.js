@@ -21,7 +21,7 @@ export default class Board extends React.Component {
             <Square 
                 ref = {this.squareElement}
                 position = {i}
-                gameState={this.props.gameState}
+                tileState={this.props.gameState.boardState[i.x][i.y]}
                 onClick={(i) => this.props.onClick(i)}
             />
         );
