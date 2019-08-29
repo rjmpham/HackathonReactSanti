@@ -4,8 +4,6 @@ import Worker from '../Model/Worker.js';
 import Game from '../View/Game.js';
 
 export default class GameController{
-    
-
     //These should be moved to gamestate at some point
     isInSetup = true;
     needsToSelectWorker = false;
@@ -83,9 +81,18 @@ export default class GameController{
             this.moveWorker(selectedWorkerPosition, position);
 
             this.needsToBuild = true;
+            
+            // Change the activly selected player
+            if (this.gameState.activePlayer === this.player_1) {
+                this.gameState.activePlayer = this.player_2;
+            } else {
+                this.gameState.activePlayer = this.player_1;
+            }
+            // Note that this new player has to select a tile
+            this.needsToSelectWorker = true;
+
             return false;
         }
-
 
         console.log("Cannot move worker to that location.");
         return true;
@@ -116,10 +123,10 @@ export default class GameController{
     }
 
     handleBoardClick(position){
-        console.log('It is ' + ((this.gameState.activePlayer === this.player_1)? 'player 1s' : 'player 2s') + ' turn.');
+        console.log('It is ' + ((this.gameState.activePlayer === this.player_1) ? 'player 1s' : 'player 2s') + ' turn.');
+        console.log("The current player needs to select a worker: " + this.needsToSelectWorker);
 
-
-        //do we need to place workers?
+        // do we need to place workers?
         if(this.isInSetup){
             console.log("We are in setup.");
             this.isInSetup = this.handleSetup(position);
@@ -143,14 +150,6 @@ export default class GameController{
 
     handleSetup(position){
         let clickedTile = this.gameState.getTile(position);
-
-        //Do both players have 2 workers?
-        // if(this.player_1.workers.length === 2 && this.player_2.workers.length ===2)
-        // {
-        //     this.isInSetup = false;
-        //     console.log("Setup has finished.");
-        //     return false;
-        // }
 
         //Can't place a worker on top of another.
         if(clickedTile.worker !== null){
@@ -181,21 +180,7 @@ export default class GameController{
                 return false;
             }
                 
-            
             return true;
         }
-          
-        
     }
-    
-
-
-    
-
-
 }
-
-
-
-
-
