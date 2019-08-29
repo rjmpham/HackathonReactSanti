@@ -108,7 +108,7 @@ export default class GameController{
 
         //they have selected a worker. But is it theirs?
         let selectedWorker = clickedTile.worker;
-        //console.log("I recieved " +this.gameState.activePlayer.hasWorkerAtPosition(position) );
+
         if(this.gameState.activePlayer.hasWorkerAtPosition(position)){
             console.log('The user has selected their worker');
             this.gameState.selectedWorker = selectedWorker;
@@ -123,7 +123,6 @@ export default class GameController{
 
     handleBoardClick(position){
         console.log('It is ' + ((this.gameState.activePlayer === this.player_1) ? 'player 1s' : 'player 2s') + ' turn.');
-        console.log('The current player needs to select a worker: ' + this.needsToSelectWorker);
 
         // do we need to place workers?
         if(this.isInSetup){
@@ -137,8 +136,12 @@ export default class GameController{
         }
 
         if(this.workerNeedsToMove){
-            this.workerNeedsToMove = this.handleWorkerMovement(position);
-            return;
+            if (this.gameState.getTile(position).isBuildable()) {
+                this.workerNeedsToMove = this.handleWorkerMovement(position);
+                return;   
+            } else {
+                console.log("Can't move to that position");
+            }
         }
 
         if (this.needsToBuild) {
@@ -151,6 +154,8 @@ export default class GameController{
                 this.workerNeedsToMove = false;
                 this.needsToSelectWorker = true;
                 this.changePlayer();
+            } else {
+                console.log("Can't build at the position " + position);
             }
         }
        
@@ -165,22 +170,16 @@ export default class GameController{
             return true;
         }
          
-
         //player 1 places their worker.
         if(this.player_1.workers.length < 2){
             clickedTile.worker = (this.player_1.placeWorker(position));
-            console.log('Player 1 has placed a worker.');
             return true;
         }
-
 
         //player 2 places their worker
         if(this.player_2.workers.length < 2){
             clickedTile.moveWorker(this.player_2.placeWorker(position));
-            console.log('Player 2 has placed a worker.');
-            // first check for finished setup
-            
-           
+
             if(this.player_2.workers.length === 2){
                 this.needsToSelectWorker = true;
                 console.log('Both players have placed their pieces.');
