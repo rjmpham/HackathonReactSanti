@@ -1,6 +1,7 @@
 import React from 'react';
 import GameState from '../Model/GameState.js';
 
+
 export default class Square extends React.Component{
     constructor(props) {
         super(props);

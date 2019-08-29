@@ -56,18 +56,15 @@ ol, ul {
 .square {
   flex:1;
   align-content: space-around;
-  background: #fff;
-  border: 1px solid #999;
   float: left;
   font-size: 20px;
   font-weight: bold;
   line-height: 20px;
   height: 80px;
-  margin-right: -1px;
-  margin-top: -1px;
   padding: 0;
   text-align: center;
   width: 80px;
+  background-image: url("/Textures/Tile.png");
 }
 
 .square:focus {
