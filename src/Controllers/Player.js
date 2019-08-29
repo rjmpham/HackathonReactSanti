@@ -33,14 +33,7 @@ export default class Player{
             this.gameState.winner = this;
     }
 
-    getWorkerAt(position){
-        for(let i =0; i < this.workers.length; i++){
-            let worker  = this.workers[i];
-            if(worker.position.equals(position)){
-                return worker;
-            }
-        }
-    }
+   
 
     //gets all valid moves as an array of Vector2s, of the valid moves for a given worker.
     getAllValidWorkerMoves(position){

@@ -13,11 +13,8 @@ export default class Game extends React.Component {
     constructor(props) {
         super(props);
         this.controller = new Controller();
-        this.state = {
-            counter: 0
-        };
-        this.handleBoardClick = this.handleBoardClick.bind(this);
-        this.handleControlClick = this.handleControlClick.bind(this);
+        
+        
     }
 
     handleBoardClick(i){
@@ -27,7 +24,7 @@ export default class Game extends React.Component {
     handleControlClick(i){
         if(i === CONTROLBUTTONS.NEWGAME){
             this.controller.newGame();
-            this.setState({counter : this.state.counter +1});
+            this.boardElement.current.updateSquare();
         }
         //this.controller.handleControlClick(i);
     }
@@ -37,7 +34,7 @@ export default class Game extends React.Component {
             <div className="game">
                 <div className="game-board">
                     <Board 
-                        controlUpdate 
+                        ref ={this.boardElement} 
                         onClick={(i) => this.handleBoardClick(i)}
                         gameState={this.controller.getGameState()}
                     />

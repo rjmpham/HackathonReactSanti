@@ -29,14 +29,21 @@ export default class Square extends React.Component{
 
     }
 
-
-        
-       
+    updateSelf(){
+        this.setState({displayLevel : this.props.gameState.getTile(this.props.position).topLevel});
+        if( this.props.gameState.getTile(this.props.position).worker !==null){
+            this.setState({worker :this.props.gameState.getTile(this.props.position).worker.indicator});
+        } else {
+            this.setState({worker :''});
+        }
+    }
     
     //pros.value is a Vector2 of the board position
     render(){
         return (
-            <button className="square" onClick={() => this.handleClick()}>
+            <button className="square" 
+                onClick={() => this.handleClick()}
+            >
                 <div className= "buildRow">   
                     <div className= "buildDisplay"> 
                         {this.state.displayLevel} 
