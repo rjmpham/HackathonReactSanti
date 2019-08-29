@@ -31,8 +31,6 @@ export default class GameController{
 
     }
 
-
-
     moveWorker(workerPosition, targetPosition){
         this.gameState.moveWorker(workerPosition, targetPosition);  //update the board state
         this.gameState.activePlayer.moveWorker(workerPosition, targetPosition); //update the worker state
