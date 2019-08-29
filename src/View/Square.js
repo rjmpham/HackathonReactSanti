@@ -2,6 +2,7 @@ import React from 'react';
 // eslint-disable-next-line no-unused-vars
 import GameState from '../Model/GameState.js';
 
+
 export default class Square extends React.Component{
     constructor(props) {
         super(props);
