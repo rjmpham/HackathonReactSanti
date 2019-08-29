@@ -4,6 +4,7 @@ import GameState from '../Model/GameState';
 import Worker from '../Model/Worker.js';
 // eslint-disable-next-line no-unused-vars
 import Game from '../View/Game.js';
+import {FLOOR} from '../Model/Floor.js';
 
 export default class GameController{
     //These should be moved to gamestate at some point
@@ -11,7 +12,6 @@ export default class GameController{
     needsToSelectWorker = false;
     workerNeedsToMove = false;
     needsToBuild = false;
-    
     gameState = null;
     
     constructor(game){
@@ -72,10 +72,6 @@ export default class GameController{
         console.log('Created a new game.');
     }
 
-    endGame(){
-        console.log('Game over!');
-    }
-
     //assumes a worker is selected 
     handleWorkerMovement(position){
         let selectedWorkerPosition = this.gameState.selectedWorker.position;
@@ -83,6 +79,10 @@ export default class GameController{
         if(this.gameState.activePlayer.verifyMove(selectedWorkerPosition, position)){
             console.log('Moving worker to ' + position.toString());
             this.moveWorker(selectedWorkerPosition, position);
+            if(this.gameState.getTile(position).topLevel===FLOOR.L_THREE){
+                this.gameState.winner = true;
+            }
+
 
             this.needsToBuild = true;
             
@@ -132,6 +132,9 @@ export default class GameController{
         console.log('The current player needs to select a worker: ' + this.needsToSelectWorker);
 
         // do we need to place workers?
+        if(this.gameState.winner===true){
+            return;
+        }
         if(this.isInSetup){
             console.log('We are in setup.');
             this.isInSetup = this.handleSetup(position);
