@@ -1,9 +1,5 @@
 import Player from './Player';
 import GameState from '../Model/GameState';
-// eslint-disable-next-line no-unused-vars
-import Worker from '../Model/Worker.js';
-// eslint-disable-next-line no-unused-vars
-import Game from '../View/Game.js';
 
 export default class GameController{
     //These should be moved to gamestate at some point
@@ -39,6 +35,14 @@ export default class GameController{
 
     }
 
+    changePlayer() {
+        if (this.gameState.activePlayer === this.player_1) {
+            this.gameState.activePlayer = this.player_2;
+        } else {
+            this.gameState.activePlayer = this.player_1;
+        }
+    }
+
     gameOver(){
 
     }
@@ -58,7 +62,6 @@ export default class GameController{
         //TODO: 
         //Updates the view, based on what the player is allowed to do.
     }
-    
 
     newGame(){
         this.isInSetup = true;
@@ -68,7 +71,7 @@ export default class GameController{
         this.gameState.reset();
         this.player_1 = new Player(this.gameState, '1');
         this.player_2 = new Player(this.gameState, '2');
-        this.gameState.activePlayer=this.player_1;
+        this.gameState.activePlayer = this.player_1;
         console.log('Created a new game.');
     }
 
@@ -85,19 +88,10 @@ export default class GameController{
             this.moveWorker(selectedWorkerPosition, position);
 
             this.needsToBuild = true;
-            
-            // Change the activly selected player
-            if (this.gameState.activePlayer === this.player_1) {
-                this.gameState.activePlayer = this.player_2;
-            } else {
-                this.gameState.activePlayer = this.player_1;
-            }
-            // Note that this new player has to select a tile
-            this.needsToSelectWorker = true;
+            this.needsToSelectWorker = false;
 
             return false;
         }
-
 
         console.log('Cannot move worker to that location.');
         return true;
@@ -133,23 +127,32 @@ export default class GameController{
 
         // do we need to place workers?
         if(this.isInSetup){
-            console.log('We are in setup.');
             this.isInSetup = this.handleSetup(position);
             return;
         }
 
-        
         if(this.needsToSelectWorker){
-            console.log('We are in needs to select.');
             this.needsToSelectWorker = this.handleWorkerSelection(position);
             return;
         }
 
         if(this.workerNeedsToMove){
-            console.log('We are in needs to needs to move.');
             this.workerNeedsToMove = this.handleWorkerMovement(position);
+            return;
         }
 
+        if (this.needsToBuild) {
+            console.log("Building at position " + position);
+            if (this.gameState.getTile(position).isBuildable()) {
+                this.buildFloor(position);
+
+                // Update the state
+                this.needsToBuild = false;
+                this.workerNeedsToMove = false;
+                this.needsToSelectWorker = true;
+                this.changePlayer();
+            }
+        }
        
     }
 
