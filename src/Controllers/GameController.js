@@ -31,9 +31,7 @@ export default class GameController{
 
     }
 
-    getGameState(){
-        return this.gameState;
-    }
+
 
     moveWorker(workerPosition, targetPosition){
         this.gameState.moveWorker(workerPosition, targetPosition);  //update the board state
@@ -41,7 +39,6 @@ export default class GameController{
         if(this.gameState.playerHasWon())
             this.gameOver();
 
-        this.game.updateState();
     }
 
     gameOver(){
