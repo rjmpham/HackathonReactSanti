@@ -16,11 +16,12 @@ export default class Square extends React.Component{
          
         if( this.props.gameState.getTile(this.props.position).worker !==null){
             workerValue = this.props.gameState.getTile(this.props.position).worker.indicator;
-            console.log("there is a worker on the tile now.");
+            console.log('there is a worker on the tile now.');
         } 
 
         if(workerValue === ''){
-            console.log("Clearing state.");
+            console.log('Clearing state.');
+            this.updateSelf();
         }
         this.setState({displayLevel : this.props.gameState.getTile(this.props.position).topLevel, 
             worker: workerValue

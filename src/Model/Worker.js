@@ -4,9 +4,10 @@ export default class Worker{
     owner = null;
     indicator = 'W';
 
-    constructor(position, owner){
+    constructor(position, owner, indicator){
         this.position = position;
         this.owner = owner;
+        this.indicator = indicator;
     }
 
     logSomething(){

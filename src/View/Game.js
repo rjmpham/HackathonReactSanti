@@ -6,13 +6,13 @@ import ControlPanel from './ControlPanel.js';
 // eslint-disable-next-line no-unused-vars
 import GameState from '../Model/GameState.js';
 import {CONTROLBUTTONS} from '../Model/ControlButtons.js'; 
-import Controller from '../Controllers/GameController';
+import GameController from '../Controllers/GameController';
 
 
 export default class Game extends React.Component {
     constructor(props) {
         super(props);
-        this.controller = new Controller();
+        this.controller = new GameController();
         
         
     }
@@ -24,7 +24,7 @@ export default class Game extends React.Component {
     handleControlClick(i){
         if(i === CONTROLBUTTONS.NEWGAME){
             this.controller.newGame();
-            this.boardElement.current.updateSquare();
+            //this.boardElement.current.updateSquare();   //so board element is null.
         }
         //this.controller.handleControlClick(i);
     }

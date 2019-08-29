@@ -7,13 +7,15 @@ export default class Player{
     workers = []
     moveDistance = 1;
 
-    constructor(gameState){
+
+    constructor(gameState, workerID){
         this.gameState = gameState;
+        this.workerID = workerID;
     }
 
     //creates a new worker at the target position, but does not update the gameState.
     placeWorker(position){
-        let newWorker = new Worker(position, this);
+        let newWorker = new Worker(position, this, this.workerID);
         this.workers.push(newWorker);
         console.log('Placed worker at ' + position);
         

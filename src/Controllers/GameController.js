@@ -15,8 +15,8 @@ export default class GameController{
     
     constructor(){
         this.gameState = new GameState(5);
-        this.player_1 = new Player(this.gameState);
-        this.player_2 = new Player(this.gameState);
+        this.player_1 = new Player(this.gameState, '1');
+        this.player_2 = new Player(this.gameState, '2');
         this.gameState.activePlayer=this.player_1;
     }
 

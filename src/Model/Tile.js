@@ -15,7 +15,7 @@ export default class Tile {
 
     moveWorker(worker){
         this.worker = worker;
-        console.log("Worker is now " + this.worker);
+        console.log('Worker is now ' + this.worker);
     }
 
     removeWorker(){
@@ -52,6 +52,7 @@ export default class Tile {
         this.worker = null;
         this.isHighlighted = false;
     }
+
 
 
     //uncaping requires memory of previos top floor
