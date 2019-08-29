@@ -59,13 +59,9 @@ export default class Board extends React.Component {
     }
 
     render() {
-        console.log('Rendered board.');
-        //this.state.viewGameState.logGameState();
-        //this.state.viewGameState.logGameState();
-        //let boardJSX = this.generateBoard();
         return (
             <div>
-                { this.generateBoard()}
+                { this.generateBoard() }
             </div>
         );
     }

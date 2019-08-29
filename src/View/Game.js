@@ -18,12 +18,17 @@ export default class Game extends React.Component {
             viewGameState: this.controller.gameState
         });
     }
-
+    winningJSX = null;
     handleBoardClick(i){
         this.controller.handleBoardClick(i);
         this.setState({
             viewGameState: this.controller.gameState
         });
+        if(this.state.viewGameState.winner === true){
+            this.winningJSX = <div className= "winner">Player {this.state.viewGameState.activePlayer.workerID} wins!!!</div>;
+        } else {
+            this.winningJSX = null;
+        }
 
     }
 
@@ -57,11 +62,15 @@ export default class Game extends React.Component {
                         
                     />
                 </div>
-                <div className="control-panel">
-                    <ControlPanel                    
-                        onClick={(i) => this.handleControlClick(i)}
-                        gameState={this.state.viewGameState}
-                    />
+
+                <div className="winner-panel">
+                    <div className="control-panel">
+                        <ControlPanel                    
+                            onClick={(i) => this.handleControlClick(i)}
+                            gameState={this.state.viewGameState}
+                        />
+                    </div>
+                    {this.winningJSX}
                 </div>
             </div>
         );
