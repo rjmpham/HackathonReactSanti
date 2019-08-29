@@ -48,9 +48,6 @@ export default class GameState{
                         else{
                             localNine.push(this.boardState[tx] [ty]);
                         }
-                        
-                        
-                        
                     }
                 }
             }

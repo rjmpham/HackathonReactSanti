@@ -35,14 +35,6 @@ export default class GameController{
 
     }
 
-    changePlayer() {
-        if (this.gameState.activePlayer === this.player_1) {
-            this.gameState.activePlayer = this.player_2;
-        } else {
-            this.gameState.activePlayer = this.player_1;
-        }
-    }
-
     gameOver(){
 
     }
@@ -145,15 +137,26 @@ export default class GameController{
         }
 
         if (this.needsToBuild) {
-            console.log("Building at position " + position);
+            console.log("Attempting to build at position " + position);
             if (this.gameState.getTile(position).isBuildable()) {
-                this.buildFloor(position);
+                let selectedWorkerPosition = this.gameState.selectedWorker.position;
+                if (this.gameState.activePlayer.verifyMove(selectedWorkerPosition, position)) {
+                    this.buildFloor(position);
 
-                // Update the state
-                this.needsToBuild = false;
-                this.workerNeedsToMove = false;
-                this.needsToSelectWorker = true;
-                this.changePlayer();
+                    // Update the state
+                    this.needsToBuild = false;
+                    this.workerNeedsToMove = false;
+                    this.needsToSelectWorker = true;
+
+                    if (this.gameState.activePlayer === this.player_1) {
+                        this.gameState.activePlayer = this.player_2;
+                    } else {
+                        this.gameState.activePlayer = this.player_1;
+                    }
+                } else {
+                    console.log("Build Position is unreachable")
+                }
+
             } else {
                 console.log("Can't build at the position " + position);
             }
