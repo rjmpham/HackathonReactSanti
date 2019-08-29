@@ -37,6 +37,16 @@ ol, ul {
     text-align: center;
 }
 
+.buildingTile{
+
+    margin-top:10%;
+    margin-left:10%;
+    margin-right:10%;
+    margin-bottom:10%;
+    height: 75px;
+    width: 75px;
+}
+
 .buildDisplay {
 
     float: left;
