@@ -12,17 +12,17 @@ import GameController from '../Controllers/GameController';
 export default class Game extends React.Component {
     constructor(props) {
         super(props);
-        this.controller = new GameController();
+        this.controller = new GameController(this);
 
         this.state=({
-            viewGameState: this.controller.getGameState()
+            viewGameState: this.controller.gameState
         });
     }
 
     handleBoardClick(i){
         this.controller.handleBoardClick(i);
         this.setState({
-            viewGameState: this.controller.getGameState()
+            viewGameState: this.controller.gameState
         });
 
     }
@@ -30,11 +30,20 @@ export default class Game extends React.Component {
     handleControlClick(i){
         if(i === CONTROLBUTTONS.NEWGAME){
             this.controller.newGame();
+
+            console.log('before state change');
             this.setState({
-                viewGameState: this.controller.getGameState()
+                viewGameState: this.controller.gameState
             });
+            console.log('newgame made');
         }
         //this.controller.handleControlClick(i);
+    }
+
+    updateState(){
+        console.log('Updating state.');
+        this.setState({viewGameState: this.controller.gameState});
+        //this.state.viewGameState.toString()   ;
     }
 
     render() {    
