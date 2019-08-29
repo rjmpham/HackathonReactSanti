@@ -4,36 +4,30 @@ export default class Square extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
-            displayLevel: this.props.gameState.getTile(this.props.position).topLevel,
+            displayLevel: this.props.tileState.topLevel,
             worker: ''
         };
     }
 
     handleClick(){
         this.props.onClick(this.props.position);
-        let workerValue = '';
-
-         
-        if( this.props.gameState.getTile(this.props.position).worker !==null){
-            workerValue = this.props.gameState.getTile(this.props.position).worker.indicator;
-            console.log('there is a worker on the tile now.');
-        } 
-
-        if(workerValue === ''){
-            console.log('Clearing state.');
-            this.updateSelf();
+        this.setState({displayLevel : this.props.tileState.topLevel});
+        
+        //if there is no worker, set state to the worker.
+        if( this.props.tileState.worker !==null){
+            this.setState({worker :this.props.tileState.worker.indicator});
+        } else {
+            this.setState({worker :''});
         }
-        this.setState({displayLevel : this.props.gameState.getTile(this.props.position).topLevel, 
-            worker: workerValue
-        });
+        
 
 
     }
 
     updateSelf(){
-        this.setState({displayLevel : this.props.gameState.getTile(this.props.position).topLevel});
-        if( this.props.gameState.getTile(this.props.position).worker !==null){
-            this.setState({worker :this.props.gameState.getTile(this.props.position).worker.indicator});
+        this.setState({displayLevel : this.props.tileState.topLevel});
+        if( this.props.tileState.worker !==null){
+            this.setState({worker :this.props.tileState.worker.indicator});
         } else {
             this.setState({worker :''});
         }

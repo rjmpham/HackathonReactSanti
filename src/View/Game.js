@@ -13,18 +13,26 @@ export default class Game extends React.Component {
     constructor(props) {
         super(props);
         this.controller = new GameController();
-        
-        
+
+        this.state=({
+            viewGameState: this.controller.getGameState()
+        });
     }
 
     handleBoardClick(i){
         this.controller.handleBoardClick(i);
+        this.setState({
+            viewGameState: this.controller.getGameState()
+        });
+
     }
 
     handleControlClick(i){
         if(i === CONTROLBUTTONS.NEWGAME){
             this.controller.newGame();
-            //this.boardElement.current.updateSquare();   //so board element is null.
+            this.setState({
+                viewGameState: this.controller.getGameState()
+            });
         }
         //this.controller.handleControlClick(i);
     }
@@ -36,13 +44,14 @@ export default class Game extends React.Component {
                     <Board 
                         ref ={this.boardElement} 
                         onClick={(i) => this.handleBoardClick(i)}
-                        gameState={this.controller.getGameState()}
+                        gameState={this.state.viewGameState}
+                        
                     />
                 </div>
                 <div className="control-panel">
                     <ControlPanel                    
                         onClick={(i) => this.handleControlClick(i)}
-                        gameState={this.controller.getGameState()}
+                        gameState={this.state.viewGameState}
                     />
                 </div>
             </div>
