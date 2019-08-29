@@ -1,12 +1,15 @@
 import React from 'react';
+import GameState from '../Model/GameState.js';
 
 export default class Square extends React.Component{
     constructor(props) {
         super(props);
-        this.state = {
+
+        this.state = ({
             displayLevel: this.props.tileState.topLevel,
-            worker: ''
-        };
+            worker: this.props.tileState.worker,
+            gameState: this.props.gameState
+        });
     }
 
     handleClick(){
@@ -20,7 +23,7 @@ export default class Square extends React.Component{
             this.setState({worker :''});
         }
         
-
+        this.forceUpdate();
 
     }
 
@@ -35,20 +38,24 @@ export default class Square extends React.Component{
     
     //pros.value is a Vector2 of the board position
     render(){
+    
+        //this.state.gameState.logGameState();
+        let tile = this.state.gameState.boardState[this.props.position.x][this.props.position.y];
+        let workerIndicator = (tile.worker == null) ? '' : tile.worker.indicator;
         return (
             <button className="square" 
                 onClick={() => this.handleClick()}
             >
                 <div className= "buildRow">   
                     <div className= "buildDisplay"> 
-                        {this.state.displayLevel} 
+                        {tile.topLevel} 
                     </div>
                     <div className= "buildSpace"> </div>
                     <div className= "buildDisplay"> </div>
                 </div>
       
                 <div className= "playerRow">
-                    {this.state.worker}
+                    {workerIndicator}
                 </div>
                 <div className= "buildRow">  
                     <div className= "buildDisplay"> </div>

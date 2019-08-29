@@ -1,6 +1,7 @@
 import Player from './Player';
 import GameState from '../Model/GameState';
 import Worker from '../Model/Worker.js';
+import Game from '../View/Game.js';
 
 export default class GameController{
     
@@ -13,11 +14,12 @@ export default class GameController{
     
     gameState = null;
     
-    constructor(){
+    constructor(game){
         this.gameState = new GameState(5);
         this.player_1 = new Player(this.gameState, '1');
         this.player_2 = new Player(this.gameState, '2');
         this.gameState.activePlayer=this.player_1;
+        this.game = game;
     }
 
     placeWorker(position) {
@@ -38,6 +40,8 @@ export default class GameController{
         this.gameState.activePlayer.moveWorker(workerPosition, targetPosition); //update the worker state
         if(this.gameState.playerHasWon())
             this.gameOver();
+
+        this.game.updateState();
     }
 
     gameOver(){

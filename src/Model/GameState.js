@@ -105,6 +105,15 @@ export default class GameState{
         
         this.playerList.forEach(x => x.reset());        
     }
+
+    logGameState(){
+        console.log('Current state: ');
+        for(let x = 0; x < this.boardSize; x++){
+            for(let y = 0; y < this.boardSize; y++){
+                console.log(this.boardState[x][y].position + ' has worker: ' + this.boardState[x][y].worker);
+            }
+        }
+    }
     
    
 }
