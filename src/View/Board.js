@@ -2,6 +2,7 @@ import React from 'react';
 import Vector2 from '../Model/Vector2.js';
 // eslint-disable-next-line no-unused-vars
 import Square from './Square.js';
+// eslint-disable-next-line no-unused-vars
 import GameState from '../Model/GameState.js';
 const BOARD_SIZE = 5;
 

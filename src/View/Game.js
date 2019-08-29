@@ -30,9 +30,12 @@ export default class Game extends React.Component {
     handleControlClick(i){
         if(i === CONTROLBUTTONS.NEWGAME){
             this.controller.newGame();
+
+            console.log('before state change');
             this.setState({
                 viewGameState: this.controller.gameState
             });
+            console.log('newgame made');
         }
         //this.controller.handleControlClick(i);
     }

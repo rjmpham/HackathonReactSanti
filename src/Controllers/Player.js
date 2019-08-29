@@ -1,6 +1,7 @@
 import Worker from '../Model/Worker.js';
 // eslint-disable-next-line no-unused-vars
 import Vector2 from '../Model/Vector2.js';
+// eslint-disable-next-line no-unused-vars
 import Tile from '../Model/Tile.js';
 
 export default class Player{
@@ -69,7 +70,7 @@ export default class Player{
         let moveValid = false;
         for(let i = 0; i < validMoves.length; i++){
             if(validMoves[i].equals(targetPosition)){
-                console.log("The move is valid.");
+                console.log('The move is valid.');
                 moveValid = true;
             }
                 
