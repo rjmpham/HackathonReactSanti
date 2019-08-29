@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import Tile from './Tile.js';
 import Player from '../Controllers/Player.js';
 import Worker from '../Model/Worker.js';
@@ -67,7 +68,7 @@ export default class GameState{
     
     //update the boardState
     moveWorker(workerPosition, targetPosition){
-        if(this.selectedWorker === null) console.error("There is no worker selected.");
+        if(this.selectedWorker === null) console.error('There is no worker selected.');
         this.boardState[targetPosition.x][targetPosition.y].moveWorker(this.selectedWorker);
         this.boardState[workerPosition.x][workerPosition.y].removeWorker();
     }
