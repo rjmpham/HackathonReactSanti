@@ -94,17 +94,5 @@ export default class GameState{
 
     setTile(position, tile){
         this.boardState[position.x, position.y] = tile;
-    }
-
-    reset(){        
-        for(let x = 0; x < this.boardState[0].length; x++){
-            for(let y = 0; y < this.boardState[x].length; y++){
-                this.boardState[x][y].reset();
-            }
-        }
-        
-        this.playerList.forEach(x => x.reset());        
-    }
-    
-   
+    }  
 }
