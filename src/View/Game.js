@@ -40,13 +40,13 @@ export default class Game extends React.Component {
 
     handleControlClick(i){
         if(i === CONTROLBUTTONS.NEWGAME){
+            //we're just refreshing the page for new game atm
+            document.location.reload(true);
+            /*
             this.controller.newGame();
-
-            this.setState({
-                viewGameState: this.controller.gameState
-            });
-            this.winningJSX = null;
             this.updateState();
+            this.winningJSX = null;
+            */
         }
         
         else if (i === CONTROLBUTTONS.PASS) {
