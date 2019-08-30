@@ -7,7 +7,7 @@ import {FLOOR} from '../Model/Floor.js';
 export default class Square extends React.Component{
     constructor(props) {
         super(props);
-        
+
         this.state = ({
             squareLevel: 'square0', 
             gameState: this.props.gameState,
@@ -54,20 +54,8 @@ export default class Square extends React.Component{
                 className={this.state.squareLevel}
                 onClick={() => this.handleClick()}
             >
-                <div className= "buildRow">   
-                    <div className= "buildDisplay"> 
-                    </div>
-                    <div className= "buildSpace"> </div>
-                    <div className= "buildDisplay"> </div>
-                </div>
-    
                 <div className= "playerRow">
                     {workerIndicator}
-                </div>
-                <div className= "buildRow">  
-                    <div className= "buildDisplay"> </div>
-                    <div className= "buildSpace"> </div>
-                    <div className= "buildDisplay"></div>
                 </div>
             </button>
         );

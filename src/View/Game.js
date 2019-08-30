@@ -1,5 +1,7 @@
 import React from 'react';
+// eslint-disable-next-line no-unused-vars
 import Board from './Board.js';
+// eslint-disable-next-line no-unused-vars
 import ControlPanel from './ControlPanel.js';
 import {CONTROLBUTTONS} from '../Model/ControlButtons.js'; 
 import GameController from '../Controllers/GameController';
