@@ -7,7 +7,7 @@ import Menu from "./View/Menu";
 ReactDOM.render(
   <>
     <Game />
-    <Menu></Menu>
+    <Menu />
   </>,
   document.getElementById('root')
 );
