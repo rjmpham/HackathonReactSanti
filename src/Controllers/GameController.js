@@ -43,18 +43,6 @@ export default class GameController{
         this.gameState.buildFloor(targetPosition); //update the board state
     }
 
-
-    endTurn(){
-
-        //update the active player
-        // let playerIndex = this.gameState.playerList.indexOf(activePlayer);
-        // playerIndex = (playerIndex + 1)% this.gameState.playerList.length;
-        // activePlayer =this.gameState.playerList[playerIndex];
-
-        //TODO: 
-        //Updates the view, based on what the player is allowed to do.
-    }
-
     newGame(){
         this.isInSetup = true;
         this.needsToSelectWorker = false;

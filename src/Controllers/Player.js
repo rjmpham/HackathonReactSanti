@@ -1,8 +1,4 @@
 import Worker from '../Model/Worker.js';
-// eslint-disable-next-line no-unused-vars
-import Vector2 from '../Model/Vector2.js';
-// eslint-disable-next-line no-unused-vars
-import Tile from '../Model/Tile.js';
 
 export default class Player{
     workers = []
@@ -25,7 +21,6 @@ export default class Player{
 
     //updates the workers position, but not the gameState (UNLESS THE PLAYER WON.)
     moveWorker(workerPosition, targetPosition){
-
         for(let i =0; i < this.workers.length; i++){
             let worker  = this.workers[i];
             if(worker.position.equals(workerPosition)){
@@ -45,22 +40,12 @@ export default class Player{
         
         localNine = localNine.filter((tile) => {return tile.isBuildable();}); //filter out all capped and worker filled tiles
         localNine = localNine.filter((tile) => {return tile.topLevel <= workerTile.topLevel+1;}); //filter out all tiles that are too high
-        // console.log('Available move tiles are: ');
-        // localNine.forEach(x => console.log(x));
         
         let validPositions = [];
         for(let i =0; i < localNine.length; i++){
             validPositions.push(localNine[i].position);
         }
         return validPositions;
-    }
-
-    //gets all valid build locations as an array of Vector2s, of the valid moves for a given worker.
-    getAllValidBuildLocations(worker){
-        let localNine = this.gameState.getWorkerLocalNine(worker.position);
-        
-        localNine = localNine.filter((tile) => tile.isBuildable()); //filter out all capped and worker filled tiles
-        return localNine.map(tile => tile.position);
     }
 
     //verifies that a given position is a valid move location for a given worker
@@ -77,11 +62,7 @@ export default class Player{
         }
         return moveValid;
     }
-    
-    //verifies that a given position is a valid build location for a given worker
-    verifyBuildAt(worker, targetPosition){
-        return this.getAllValidBuildLocations(worker.position).includes(targetPosition);
-    }
+
 
     hasWorkerAtPosition(position){
         let foundMatch = false;
@@ -96,9 +77,5 @@ export default class Player{
     reset(){
         this.workers = [];
     }
-
-
-
-
 }
 
