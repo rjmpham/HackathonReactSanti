@@ -47,9 +47,8 @@ export default class Game extends React.Component {
         }
         
         else if (i === CONTROLBUTTONS.PASS) {
-            let current_player = this.get_current_player();
-            console.log("Player " + current_player + " has decided to pass their turn.");
             this.controller.newTurn();
+            this.updateState();
         }
     }
 

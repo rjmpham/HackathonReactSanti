@@ -22,8 +22,6 @@ export default function Menu() {
 
       <h2>Winning the Game</h2>
       <p>If one of your <b className={styles.orange_text}>Workers</b> <b className={styles.purple_text}>moves up</b> on top of <b className={styles.orange_text}>level 3</b> durning your turn, you insantly win!</p>
-
-      <p>You <u>must</u> always peform a <b className={styles.purple_text}>move</b> then <b className={styles.purple_text}>build</b> on your turn. If you are unable to, you lose.</p>
     </div>
   )
 }
