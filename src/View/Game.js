@@ -35,7 +35,7 @@ export default class Game extends React.Component {
             this.setState({
                 viewGameState: this.controller.gameState
             });
-            console.log('newgame made');
+            this.winningJSX = null;
         }
         
         else if (i === CONTROLBUTTONS.PASS) {
@@ -46,7 +46,6 @@ export default class Game extends React.Component {
     }
 
     updateState(){
-        console.log('Updating state.');
         this.setState({viewGameState: this.controller.gameState});
     }
 
