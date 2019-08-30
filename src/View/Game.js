@@ -36,17 +36,15 @@ export default class Game extends React.Component {
         if(i === CONTROLBUTTONS.NEWGAME){
             this.controller.newGame();
 
-            console.log('before state change');
             this.setState({
                 viewGameState: this.controller.gameState
             });
-            console.log('newgame made');
+            this.winningJSX = null;
         }
         //this.controller.handleControlClick(i);
     }
 
     updateState(){
-        console.log('Updating state.');
         this.setState({viewGameState: this.controller.gameState});
         //this.state.viewGameState.toString()   ;
     }
