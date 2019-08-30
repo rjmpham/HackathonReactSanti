@@ -5,14 +5,10 @@ import Worker from '../Model/Worker.js';
 
 export default class GameState{
     boardState = null;
-
     playerList = []
-
     activePlayer = null;
     boardSize = 0;
-
     winner = null;
-
     selectedWorker = null;
     highlightedTiles = [];
     
@@ -101,7 +97,8 @@ export default class GameState{
             }
         }
         
-        this.playerList.forEach(x => x.reset());        
+        this.playerList.forEach(x => x.reset()); 
+        this.winner = null;       
     }
 
     logGameState(){

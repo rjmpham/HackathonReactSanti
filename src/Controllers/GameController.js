@@ -1,5 +1,10 @@
 import Player from './Player';
 import GameState from '../Model/GameState';
+// eslint-disable-next-line no-unused-vars
+import Worker from '../Model/Worker.js';
+// eslint-disable-next-line no-unused-vars
+import Game from '../View/Game.js';
+import {FLOOR} from '../Model/Floor.js';
 
 export default class GameController{
     //These should be moved to gamestate at some point
@@ -7,7 +12,6 @@ export default class GameController{
     needsToSelectWorker = false;
     workerNeedsToMove = false;
     needsToBuild = false;
-    
     gameState = null;
     
     constructor(game){
@@ -55,10 +59,6 @@ export default class GameController{
         console.log('Created a new game.');
     }
 
-    endGame(){
-        console.log('Game over!');
-    }
-
     //assumes a worker is selected 
     handleWorkerMovement(position){
         let selectedWorkerPosition = this.gameState.selectedWorker.position;
@@ -66,6 +66,11 @@ export default class GameController{
         if(this.gameState.activePlayer.verifyMove(selectedWorkerPosition, position)){
             console.log('Moving worker to ' + position.toString());
             this.moveWorker(selectedWorkerPosition, position);
+            if(this.gameState.getTile(position).topLevel===FLOOR.L_THREE){
+                this.gameState.winner = true;
+                return false;
+            }
+
 
             this.needsToBuild = true;
             this.needsToSelectWorker = false;
@@ -105,6 +110,9 @@ export default class GameController{
         console.log('It is ' + ((this.gameState.activePlayer === this.player_1) ? 'player 1s' : 'player 2s') + ' turn.');
 
         // do we need to place workers?
+        if(this.gameState.winner===true){
+            return;
+        }
         if(this.isInSetup){
             this.isInSetup = this.handleSetup(position);
             return;

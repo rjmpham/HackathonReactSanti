@@ -1,13 +1,15 @@
 import Worker from '../Model/Worker.js';
 
 export default class Player{
-    workers = []
+    workers = [];
     moveDistance = 1;
+    workerID = '';
 
 
-    constructor(gameState, workerID){
+    constructor(gameState, workerID,playerName){
         this.gameState = gameState;
         this.workerID = workerID;
+        this.playerName = playerName;
     }
 
     //creates a new worker at the target position, but does not update the gameState.

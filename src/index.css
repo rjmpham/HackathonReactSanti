@@ -13,6 +13,17 @@ ol, ul {
   display: table;
 }
 
+.winner {
+    margin-top: 1in;
+    margin-left: 1in;
+    font-size: 30px;
+    font-weight: bold;
+    line-height: 30px;
+}
+
+.winner-panel{
+    flex-direction: column;
+}
 .status {
   margin-bottom: 10px;
 }
