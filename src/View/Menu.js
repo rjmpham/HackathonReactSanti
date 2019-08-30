@@ -5,7 +5,7 @@ export default function Menu() {
   return (
     <div className={styles.html}>
       <h2>Setup</h2>
-      <p>The youngest player is the <b class={styles.orange_text}>Start Player</b>, who begins by placing 2 <b class={styles.orange_text}>Workers</b> of their chosen color into any <b class={styles.orange_text}>unoccupied spaces</b> on the board. The other players then place their <b className={styles.orange_text}>workers.</b></p>
+      <p>The youngest player is the <b className={styles.orange_text}>Start Player</b>, who begins by placing 2 <b className={styles.orange_text}>Workers</b> of their chosen color into any <b className={styles.orange_text}>unoccupied spaces</b> on the board. The other players then place their <b className={styles.orange_text}>workers.</b></p>
       
       <h2>How to Play</h2>
 
@@ -23,7 +23,7 @@ export default function Menu() {
       <h2>Winning the Game</h2>
       <p>If one of your <b className={styles.orange_text}>Workers</b> <b className={styles.purple_text}>moves up</b> on top of <b className={styles.orange_text}>level 3</b> durning your turn, you insantly win!</p>
 
-      <p>You <u>must</u> always peform a <b classN={styles.purple_text}>move</b> then <b className={styles.purple_text}>build</b> on your turn. If you are unable to, you lose.</p>
+      <p>You <u>must</u> always peform a <b className={styles.purple_text}>move</b> then <b className={styles.purple_text}>build</b> on your turn. If you are unable to, you lose.</p>
     </div>
   )
 }

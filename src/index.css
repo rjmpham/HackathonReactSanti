@@ -8,11 +8,6 @@ ol, ul {
   padding-left: 30px;
 }
 
-button {
-  background-color: #ffda79;
-  border-radius: 4px;
-}
-
 .container {
   text-align: center;
 }
@@ -103,17 +98,3 @@ button {
 .control-panel {
   margin-left: 20px;
 }
-
-.menuButton{
-    border: 1px solid #999;
-    font-size: 16px;
-    font-weight: bold;
-    line-height: 20px;
-    height: 30px;
-    margin-right: -1px;
-    margin-left: 30px;
-    margin-top: -1px;
-    padding: 0;
-    text-align: center;
-    width: 120px;
-  }

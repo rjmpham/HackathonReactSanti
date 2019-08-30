@@ -5,8 +5,8 @@ import Game from "./View/Game.js";
 import Menu from "./View/Menu";
 
 ReactDOM.render(
-  <div class="container">
-    <div class="inner_content">
+  <div className="container">
+    <div className="inner_content">
       <Game />
       <Menu />
     </div>

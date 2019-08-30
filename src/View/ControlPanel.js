@@ -1,5 +1,6 @@
 import React from 'react';
 import {CONTROLBUTTONS} from '../Model/ControlButtons.js'; 
+import styles from "../styles/ControlPanel.module.css";
 
 function ControlPannel(props){
 
@@ -10,14 +11,14 @@ function ControlPannel(props){
     return(
         <div>
             <button 
-                className="menuButton" 
+                className={styles.menuButton} 
                 onClick={() => handleClick(CONTROLBUTTONS.PASS)}
             > 
                 Pass
             </button>
             
             <button 
-                className="menuButton" 
+                className={styles.menuButton}
                 onClick={() => handleClick(CONTROLBUTTONS.NEWGAME)}
             > 
                 New Game
