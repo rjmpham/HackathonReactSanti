@@ -1,5 +1,7 @@
 import React from 'react';
+// eslint-disable-next-line no-unused-vars
 import Board from './Board.js';
+// eslint-disable-next-line no-unused-vars
 import ControlPanel from './ControlPanel.js';
 import {CONTROLBUTTONS} from '../Model/ControlButtons.js'; 
 import GameController from '../Controllers/GameController';
@@ -40,7 +42,7 @@ export default class Game extends React.Component {
         
         else if (i === CONTROLBUTTONS.PASS) {
             let is_player_1 = this.controller.gameState.activePlayer === this.controller.player_1;
-            console.log("Player " + (is_player_1 ? "1" : "2") + " has decided to pass their turn.");
+            console.log('Player ' + (is_player_1 ? '1' : '2') + ' has decided to pass their turn.');
             this.controller.newTurn();
         }
     }

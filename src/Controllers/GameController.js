@@ -124,14 +124,27 @@ export default class GameController {
 
         if (this.gameState.needsToBuild) {
             console.log('Attempting to build at position ' + position);
-            if (this.gameState.getTile(position).isBuildable()) {
-                let selectedWorkerPosition = this.gameState.selectedWorker.position;
-                if (this.gameState.activePlayer.verifyMove(selectedWorkerPosition, position)) {
-                    this.buildFloor(position);
+            let target = this.gameState.getTile(position);
 
+            if (target.isBuildable()) {
+                let selectedWorkerPosition = this.gameState.selectedWorker.position;
+
+                let local9 = this.gameState.getLocalNine(selectedWorkerPosition);
+                let builtBool = false;
+
+                for(let i = 0; i < local9.length; i++){
+                    
+                    if(local9[i]===target){
+                        this.gameState.buildFloor(position);
+                        builtBool = true;
+                        break;
+                    }
+                }
+                
+                if (builtBool) {
                     this.newTurn();
                 } else {
-                    console.log('Build Position is unreachable')
+                    console.log('Build Position is unreachable');
                 }
 
             } else {
@@ -140,6 +153,8 @@ export default class GameController {
         }
        
     }
+
+
 
     handleSetup(position){
         let clickedTile = this.gameState.getTile(position);
