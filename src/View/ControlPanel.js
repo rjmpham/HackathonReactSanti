@@ -18,13 +18,6 @@ function ControlPannel(props){
             > 
                 Pass
             </button>
-
-            <button 
-                className="menuButton" 
-                onClick={() => handleClick(CONTROLBUTTONS.UNDO)}
-            > 
-                Undo
-            </button>
             
             <button 
                 className="menuButton" 

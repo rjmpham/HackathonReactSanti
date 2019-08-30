@@ -86,12 +86,11 @@ export default class GameController {
         if(this.gameState.activePlayer.hasWorkerAtPosition(position)){
             console.log('The user has selected their worker');
             this.gameState.selectedWorker = selectedWorker;
-            this.gameState.workerNeedsToMove = true;
+            if(!this.gameState.workerNeedsToMove){
+                this.gameState.workerNeedsToMove = true;
+            }
             return false;
         }
-
-        console.log('The user has selected a worker that was not their own.');
-        //they have selected a worker that is not their own.
         return true;
     }
 
@@ -118,12 +117,13 @@ export default class GameController {
                 this.gameState.workerNeedsToMove = this.handleWorkerMovement(position);
                 return;   
             } else {
-                console.log("Can't move to that position");
+                this.handleWorkerSelection(position);
+                return;
             }
         }
 
         if (this.gameState.needsToBuild) {
-            console.log("Attempting to build at position " + position);
+            console.log('Attempting to build at position ' + position);
             if (this.gameState.getTile(position).isBuildable()) {
                 let selectedWorkerPosition = this.gameState.selectedWorker.position;
                 if (this.gameState.activePlayer.verifyMove(selectedWorkerPosition, position)) {
@@ -131,7 +131,7 @@ export default class GameController {
 
                     this.newTurn();
                 } else {
-                    console.log("Build Position is unreachable")
+                    console.log('Build Position is unreachable')
                 }
 
             } else {
