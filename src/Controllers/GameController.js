@@ -7,7 +7,7 @@ export default class GameController {
         this.gameState = new GameState(5);
         this.player_1 = new Player(this.gameState, '1');
         this.player_2 = new Player(this.gameState, '2');
-        this.gameState.activePlayer=this.player_1;
+        this.gameState.activePlayer = this.player_1;
         this.game = game;
     }
 
@@ -18,13 +18,6 @@ export default class GameController {
     moveWorker(workerPosition, targetPosition){
         this.gameState.moveWorker(workerPosition, targetPosition);  //update the board state
         this.gameState.activePlayer.moveWorker(workerPosition, targetPosition); //update the worker state
-        if(this.gameState.playerHasWon())
-            this.gameOver();
-
-    }
-
-    gameOver() {
-
     }
 
     buildFloor(targetPosition){
@@ -43,6 +36,19 @@ export default class GameController {
         console.log('Created a new game.');
     }
 
+    // Resets the game State
+    newTurn() {
+        this.gameState.needsToBuild = false;
+        this.gameState.workerNeedsToMove = false;
+        this.gameState.needsToSelectWorker = true;
+
+        if (this.gameState.activePlayer === this.player_1) {
+            this.gameState.activePlayer = this.player_2;
+        } else {
+            this.gameState.activePlayer = this.player_1;
+        }
+    }
+
     //assumes a worker is selected 
     handleWorkerMovement(position){
         let selectedWorkerPosition = this.gameState.selectedWorker.position;
@@ -54,7 +60,6 @@ export default class GameController {
                 this.gameState.winner = true;
                 return false;
             }
-
 
             this.gameState.needsToBuild = true;
             this.gameState.needsToSelectWorker = false;
@@ -93,10 +98,11 @@ export default class GameController {
     handleBoardClick(position){
         console.log('It is ' + ((this.gameState.activePlayer === this.player_1) ? 'player 1s' : 'player 2s') + ' turn.');
 
-        // do we need to place workers?
-        if(this.gameState.winner===true){
+        // If the 
+        if(this.gameState.winner === true) {
             return;
         }
+
         if(this.gameState.isInSetup){
             this.gameState.isInSetup = this.handleSetup(position);
             return;
@@ -123,16 +129,7 @@ export default class GameController {
                 if (this.gameState.activePlayer.verifyMove(selectedWorkerPosition, position)) {
                     this.buildFloor(position);
 
-                    // Update the state
-                    this.gameState.needsToBuild = false;
-                    this.gameState.workerNeedsToMove = false;
-                    this.gameState.needsToSelectWorker = true;
-
-                    if (this.gameState.activePlayer === this.player_1) {
-                        this.gameState.activePlayer = this.player_2;
-                    } else {
-                        this.gameState.activePlayer = this.player_1;
-                    }
+                    this.newTurn();
                 } else {
                     console.log("Build Position is unreachable")
                 }
