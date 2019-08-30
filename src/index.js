@@ -1,9 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-import Game from "./View/Game.js"
+import Game from "./View/Game.js";
+import Menu from "./View/Menu";
 
 ReactDOM.render(
-  <Game />,
+  <>
+    <Game />
+    <Menu></Menu>
+  </>,
   document.getElementById('root')
 );

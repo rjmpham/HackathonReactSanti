@@ -48,7 +48,6 @@ export default class Game extends React.Component {
     updateState(){
         console.log('Updating state.');
         this.setState({viewGameState: this.controller.gameState});
-        //this.state.viewGameState.toString()   ;
     }
 
     render() {    
