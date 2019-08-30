@@ -38,6 +38,7 @@ export default class Game extends React.Component {
                 viewGameState: this.controller.gameState
             });
             this.winningJSX = null;
+            this.updateState();
         }
         
         else if (i === CONTROLBUTTONS.PASS) {
