@@ -64,7 +64,7 @@ ol, ul {
 
 }
 
-.square {
+.square0 {
   flex:1;
   align-content: space-around;
   float: left;
@@ -75,8 +75,71 @@ ol, ul {
   padding: 0;
   text-align: center;
   width: 80px;
-  background-image: url("/Textures/Tile.png");
+  background-image: url("/Imgs/0.png");
+
 }
+
+.square1 {
+    flex:1;
+    align-content: space-around;
+    float: left;
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 20px;
+    height: 80px;
+    padding: 0;
+    text-align: center;
+    width: 80px;
+    background-image: url("/Imgs/L1.png");
+  
+  }
+
+
+.square2 {
+    flex:1;
+    align-content: space-around;
+    float: left;
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 20px;
+    height: 80px;
+    padding: 0;
+    text-align: center;
+    width: 80px;
+    background-image: url("/Imgs/L2.png");
+  
+}
+
+.square3 {
+    flex:1;
+    align-content: space-around;
+    float: left;
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 20px;
+    height: 80px;
+    padding: 0;
+    text-align: center;
+    width: 80px;
+    background-image: url("/Imgs/L3.png");
+  
+  }
+
+.square4{
+    flex:1;
+    align-content: space-around;
+    float: left;
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 20px;
+    height: 80px;
+    padding: 0;
+    text-align: center;
+    width: 80px;
+    background-image: url("/Imgs/D.png");
+  
+  }
+
 
 .square:focus {
   outline: none;
