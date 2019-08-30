@@ -11,6 +11,11 @@ export default class GameState{
     winner = null;
     selectedWorker = null;
     highlightedTiles = [];
+
+    isInSetup = true;
+    needsToSelectWorker = false;
+    workerNeedsToMove = false;
+    needsToBuild = false;
     
     constructor(boardSize){
         this.boardState = new Array(boardSize);

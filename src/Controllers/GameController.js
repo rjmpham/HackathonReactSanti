@@ -1,19 +1,8 @@
 import Player from './Player';
 import GameState from '../Model/GameState';
-// eslint-disable-next-line no-unused-vars
-import Worker from '../Model/Worker.js';
-// eslint-disable-next-line no-unused-vars
-import Game from '../View/Game.js';
 import {FLOOR} from '../Model/Floor.js';
 
-export default class GameController{
-    //These should be moved to gamestate at some point
-    isInSetup = true;
-    needsToSelectWorker = false;
-    workerNeedsToMove = false;
-    needsToBuild = false;
-    gameState = null;
-    
+export default class GameController {
     constructor(game){
         this.gameState = new GameState(5);
         this.player_1 = new Player(this.gameState, '1');
@@ -25,11 +14,6 @@ export default class GameController{
     placeWorker(position) {
         this.gameState.activePlayer.placeWorker(position);
     }
-    
-    //This is where the game loop should be!
-    beginTurn(){
-
-    }
 
     moveWorker(workerPosition, targetPosition){
         this.gameState.moveWorker(workerPosition, targetPosition);  //update the board state
@@ -39,7 +23,7 @@ export default class GameController{
 
     }
 
-    gameOver(){
+    gameOver() {
 
     }
 
@@ -48,10 +32,10 @@ export default class GameController{
     }
 
     newGame(){
-        this.isInSetup = true;
-        this.needsToSelectWorker = false;
-        this.workerNeedsToMove = false;
-        this.needsToBuild = false;
+        this.gameState.isInSetup = true;
+        this.gameState.needsToSelectWorker = false;
+        this.gameState.workerNeedsToMove = false;
+        this.gameState.needsToBuild = false;
         this.gameState.reset();
         this.player_1 = new Player(this.gameState, '1');
         this.player_2 = new Player(this.gameState, '2');
@@ -72,8 +56,8 @@ export default class GameController{
             }
 
 
-            this.needsToBuild = true;
-            this.needsToSelectWorker = false;
+            this.gameState.needsToBuild = true;
+            this.gameState.needsToSelectWorker = false;
 
             return false;
         }
@@ -97,7 +81,7 @@ export default class GameController{
         if(this.gameState.activePlayer.hasWorkerAtPosition(position)){
             console.log('The user has selected their worker');
             this.gameState.selectedWorker = selectedWorker;
-            this.workerNeedsToMove = true;
+            this.gameState.workerNeedsToMove = true;
             return false;
         }
 
@@ -113,26 +97,26 @@ export default class GameController{
         if(this.gameState.winner===true){
             return;
         }
-        if(this.isInSetup){
-            this.isInSetup = this.handleSetup(position);
+        if(this.gameState.isInSetup){
+            this.gameState.isInSetup = this.handleSetup(position);
             return;
         }
 
-        if(this.needsToSelectWorker){
-            this.needsToSelectWorker = this.handleWorkerSelection(position);
+        if(this.gameState.needsToSelectWorker){
+            this.gameState.needsToSelectWorker = this.handleWorkerSelection(position);
             return;
         }
 
-        if(this.workerNeedsToMove){
+        if(this.gameState.workerNeedsToMove){
             if (this.gameState.getTile(position).isBuildable()) {
-                this.workerNeedsToMove = this.handleWorkerMovement(position);
+                this.gameState.workerNeedsToMove = this.handleWorkerMovement(position);
                 return;   
             } else {
                 console.log("Can't move to that position");
             }
         }
 
-        if (this.needsToBuild) {
+        if (this.gameState.needsToBuild) {
             console.log("Attempting to build at position " + position);
             if (this.gameState.getTile(position).isBuildable()) {
                 let selectedWorkerPosition = this.gameState.selectedWorker.position;
@@ -140,9 +124,9 @@ export default class GameController{
                     this.buildFloor(position);
 
                     // Update the state
-                    this.needsToBuild = false;
-                    this.workerNeedsToMove = false;
-                    this.needsToSelectWorker = true;
+                    this.gameState.needsToBuild = false;
+                    this.gameState.workerNeedsToMove = false;
+                    this.gameState.needsToSelectWorker = true;
 
                     if (this.gameState.activePlayer === this.player_1) {
                         this.gameState.activePlayer = this.player_2;
@@ -180,7 +164,7 @@ export default class GameController{
             clickedTile.moveWorker(this.player_2.placeWorker(position));
 
             if(this.player_2.workers.length === 2){
-                this.needsToSelectWorker = true;
+                this.gameState.needsToSelectWorker = true;
                 console.log('Both players have placed their pieces.');
                 this.gameState.activePlayer=this.player_1;
                 return false;
