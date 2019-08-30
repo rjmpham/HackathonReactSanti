@@ -3,7 +3,7 @@ import styles from "../styles/Menu.module.css";
 
 export default function Menu() {
   return (
-    <div className={styles.html}>
+    <div className={styles.body}>
       <h2>Setup</h2>
       <p>The youngest player is the <b className={styles.orange_text}>Start Player</b>, who begins by placing 2 <b className={styles.orange_text}>Workers</b> of their chosen color into any <b className={styles.orange_text}>unoccupied spaces</b> on the board. The other players then place their <b className={styles.orange_text}>workers.</b></p>
       

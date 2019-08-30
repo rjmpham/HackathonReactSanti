@@ -14,6 +14,7 @@ export default class Game extends React.Component {
             viewGameState: this.controller.gameState
         });
     }
+
     winningJSX = null;
     handleBoardClick(i){
         this.controller.handleBoardClick(i);
@@ -28,6 +29,13 @@ export default class Game extends React.Component {
 
     }
 
+    // Checks who the current player is
+    // returns "1" if player is the current player
+    // returns "2" otherwise
+    get_current_player() {
+        return this.controller.gameState.activePlayer === this.controller.player_1 ? '1' : '2';
+    }
+
     handleControlClick(i){
         if(i === CONTROLBUTTONS.NEWGAME){
             this.controller.newGame();
@@ -39,8 +47,8 @@ export default class Game extends React.Component {
         }
         
         else if (i === CONTROLBUTTONS.PASS) {
-            let is_player_1 = this.controller.gameState.activePlayer === this.controller.player_1;
-            console.log("Player " + (is_player_1 ? "1" : "2") + " has decided to pass their turn.");
+            let current_player = this.get_current_player();
+            console.log("Player " + current_player + " has decided to pass their turn.");
             this.controller.newTurn();
         }
     }
@@ -50,6 +58,7 @@ export default class Game extends React.Component {
     }
 
     render() {    
+        let current_player = this.get_current_player();
         return (
             <div className="game">
                 <div className="game-board">
@@ -67,6 +76,9 @@ export default class Game extends React.Component {
                             onClick={(i) => this.handleControlClick(i)}
                             gameState={this.state.viewGameState}
                         />
+                    </div>
+                    <div>
+                        <p>It is <b>Player {current_player}'s turn</b></p>
                     </div>
                     {this.winningJSX}
                 </div>
