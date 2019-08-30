@@ -168,6 +168,9 @@ export default class GameController {
         //player 1 places their worker.
         if(this.player_1.workers.length < 2){
             clickedTile.worker = (this.player_1.placeWorker(position));
+            if (this.player_1.workers.length === 2) {
+                this.gameState.activePlayer = this.player_2;
+            }
             return true;
         }
 
