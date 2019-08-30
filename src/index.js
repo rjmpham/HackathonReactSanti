@@ -5,9 +5,11 @@ import Game from "./View/Game.js";
 import Menu from "./View/Menu";
 
 ReactDOM.render(
-  <>
-    <Game />
-    <Menu />
-  </>,
+  <div class="container">
+    <div class="inner_content">
+      <Game />
+      <Menu />
+    </div>
+  </div>,
   document.getElementById('root')
 );
