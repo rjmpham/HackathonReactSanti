@@ -25,7 +25,6 @@ export default class Tile {
 
     //currently also the isMoveable
     isBuildable(){
-        console.log((!this.capped) && (this.worker === null));
         return (!this.capped) && (this.worker === null);
     }
 

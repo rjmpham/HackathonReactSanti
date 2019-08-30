@@ -11,6 +11,11 @@ export default class GameState{
     winner = null;
     selectedWorker = null;
     highlightedTiles = [];
+
+    isInSetup = true;
+    needsToSelectWorker = false;
+    workerNeedsToMove = false;
+    needsToBuild = false;
     
     constructor(boardSize){
         this.boardState = new Array(boardSize);
@@ -31,22 +36,19 @@ export default class GameState{
     //Returns up to 9 Tiles, depending if the position is on the edge of the board or not.
     getLocalNine(position){
         let localNine = [];
-        for(let dx = -1; dx <= 1; dx++){
-            for(let dy = -1; dy <= 1; dy++){
+        for (let dx = -1; dx <= 1; dx++){
+            for (let dy = -1; dy <= 1; dy++){
                 let tx = position.x + dx ;
                 let ty = position.y + dy;
-                if(tx >= 0 && tx < this.boardSize){
-                    if(ty >= 0 && ty < this.boardSize){
+                if (tx >= 0 && tx < this.boardSize){
+                    if (ty >= 0 && ty < this.boardSize){
                         //console.log('Adding tile at (' + tx + ', ' + ty + ').');
-                        if(!this.boardState[tx][ty] === undefined){
+                        if (!this.boardState[tx][ty] === undefined){
                             console.error('Attempted to push undefined to local 9.');
                         }
-                        else{
-                            localNine.push(this.boardState[tx] [ty]);
+                        else {
+                            localNine.push(this.boardState[tx][ty]);
                         }
-                        
-                        
-                        
                     }
                 }
             }
@@ -90,7 +92,7 @@ export default class GameState{
     }
 
     setTile(position, tile){
-        this.boardState[position.x, position.y] = tile;
+        this.boardState[position.x][position.y] = tile;
     }
 
     reset(){        

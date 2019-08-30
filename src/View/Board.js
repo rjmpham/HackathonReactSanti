@@ -1,9 +1,7 @@
 import React from 'react';
 import Vector2 from '../Model/Vector2.js';
-// eslint-disable-next-line no-unused-vars
 import Square from './Square.js';
-// eslint-disable-next-line no-unused-vars
-import GameState from '../Model/GameState.js';
+
 const BOARD_SIZE = 5;
 
 export default class Board extends React.Component {
@@ -21,18 +19,15 @@ export default class Board extends React.Component {
         this.squareElement.current.updateSelf();
     }
 
-    //takes a vector and assigns that vector to a square, also assigns an onclick method?
+    // takes a vector and assigns that vector to a square, also assigns an onclick method
     renderSquare(i) {
-
-        //console.log('Rendering square: ' + this.state.viewGameState.boardState[i.x][i.y].worker);
         return (
-            <Square 
+            <Square
                 ref = {this.squareElement}
                 position = {i}
                 tileState={this.state.viewGameState.boardState[i.x][i.y]}
                 onClick={(i) => this.props.onClick(i)}
                 gameState={this.state.viewGameState}
-               
             />
         );
     }
@@ -48,13 +43,14 @@ export default class Board extends React.Component {
     generateBoard(){
         let rowSJX = [];
   
-        for(let i =0; i < BOARD_SIZE; i++){
-
-            rowSJX.push(<div className='board-row'>
-                {this.generateBoardRow(i)}
-            </div>);
-            
+        for(let i = 0; i < BOARD_SIZE; i++){
+            rowSJX.push(
+                <div className='board-row'>
+                    {this.generateBoardRow(i)}
+                </div>
+            );
         }
+
         return rowSJX;
     }
 
