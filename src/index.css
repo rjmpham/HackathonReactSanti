@@ -1,10 +1,19 @@
 body {
   font: 14px "Century Gothic", Futura, sans-serif;
   margin: 20px;
+  background-color: #f7f1e3;
 }
 
 ol, ul {
   padding-left: 30px;
+}
+
+.container {
+  text-align: center;
+}
+
+.inner_content {
+  display: inline-block;
 }
 
 .board-row:after {
@@ -29,7 +38,6 @@ ol, ul {
 }
 
 .buildSpace{
-    
     width: 50%;
     height: 100%;
     float: left;
@@ -49,19 +57,14 @@ ol, ul {
 }
 
 .buildDisplay {
-
     float: left;
     text-align: center;
-
 }
 
 .playerRow{
     height: 35%;
     width: 100%;
     text-align: center;
-
-
-
 }
 
 .square0 {
@@ -152,22 +155,9 @@ ol, ul {
 .game {
   display: flex;
   flex-direction: row;
+  padding: 10px 0;
 }
 
 .control-panel {
   margin-left: 20px;
 }
-
-.menuButton{
-    border: 1px solid #999;
-    font-size: 16px;
-    font-weight: bold;
-    line-height: 20px;
-    height: 30px;
-    margin-right: -1px;
-    margin-left: 30px;
-    margin-top: -1px;
-    padding: 0;
-    text-align: center;
-    width: 120px;
-  }

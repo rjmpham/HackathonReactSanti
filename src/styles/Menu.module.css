@@ -1,0 +1,15 @@
+.html {
+  max-width: 800px;
+  text-align: center;
+  background-color: #ffda79;
+  border-radius: 4px;
+  padding: 4px 10px;
+}
+
+.purple_text {
+  color: #474787;
+}
+
+.orange_text {
+  color: #b33939;
+}
