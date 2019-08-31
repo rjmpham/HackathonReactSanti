@@ -34,7 +34,7 @@ export default class Board extends React.Component {
 
     generateBoardRow(row_index){
         let squareJSX = [];
-        for(let y =0; y < BOARD_SIZE; y++){
+        for(let y = 0; y < BOARD_SIZE; y++){
             squareJSX.push(this.renderSquare(new Vector2(row_index,y)));
         }
         return squareJSX;

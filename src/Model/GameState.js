@@ -1,7 +1,5 @@
 /* eslint-disable no-unused-vars */
 import Tile from './Tile.js';
-import Player from '../Controllers/Player.js';
-import Worker from '../Model/Worker.js';
 
 export default class GameState{
     boardState = null;
@@ -25,8 +23,8 @@ export default class GameState{
             this.boardState[i] = new Array(boardSize);
         }
         
-        for(let x = 0; x < this.boardState[0].length; x++){
-            for(let y = 0; y < this.boardState[x].length; y++){
+        for (let x = 0; x < this.boardState[0].length; x++){
+            for (let y = 0; y < this.boardState[x].length; y++){
                 this.boardState[x][y] = new Tile(x, y); // 0 means nothing has been built
             }
         }
@@ -44,7 +42,6 @@ export default class GameState{
                 let ty = position.y + dy;
                 if (tx >= 0 && tx < this.boardSize){
                     if (ty >= 0 && ty < this.boardSize){
-                        //console.log('Adding tile at (' + tx + ', ' + ty + ').');
                         if (!this.boardState[tx][ty] === undefined){
                             console.error('Attempted to push undefined to local 9.');
                         }

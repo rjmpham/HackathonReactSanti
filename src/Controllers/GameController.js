@@ -45,6 +45,16 @@ export default class GameController {
         this.gameState.activePlayer = (this.gameState.activePlayer === this.player_1) ? this.player_2 : this.player_1;
     }
 
+    // Hightlight the squares around a selected worker to indicate which ones are buildable
+    // Not sure how to get which squares are buildable. Also need to add a method to unhighlight squares once they are selected
+    highlight_builidable_squares(pSosition) {
+        let local_nine = this.gameState.getLocalNine(position);
+        local_nine.forEach(tile => {
+            tile.isHighlighted = true;
+            console.log(tile);
+        });
+    }
+
     //assumes a worker is selected 
     handleWorkerMovement(position){
         let selectedWorkerPosition = this.gameState.selectedWorker.position;
@@ -116,6 +126,7 @@ export default class GameController {
         }
 
         if (this.gameState.needsToBuild) {
+            this.highlight_builidable_squares(position);
             console.log('Attempting to build at position ' + position);
             let target = this.gameState.getTile(position);
 
@@ -126,7 +137,6 @@ export default class GameController {
                 let builtBool = false;
 
                 for(let i = 0; i < local9.length; i++){
-                    
                     if(local9[i]===target){
                         this.gameState.buildFloor(position);
                         builtBool = true;
@@ -141,7 +151,7 @@ export default class GameController {
                 }
 
             } else {
-                this.gameState.error_message = "Can't build at that position";
+                this.gameState.error_message = "Can't build on tiles that are already occupied";
             }
         }
        

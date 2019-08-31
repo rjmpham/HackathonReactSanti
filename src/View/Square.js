@@ -48,6 +48,7 @@ export default class Square extends React.Component{
         //this.state.gameState.logGameState();
         let tile = this.state.gameState.boardState[this.props.position.x][this.props.position.y];
         let workerIndicator = (tile.worker == null) ? '' : tile.worker.indicator;
+        let is_highlighted = tile.is_highlighted;
         return (
             <button 
                 // eslint-disable-next-line quotes

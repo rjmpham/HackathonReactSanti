@@ -1,7 +1,5 @@
 import React from 'react';
-// eslint-disable-next-line no-unused-vars
 import Board from './Board.js';
-// eslint-disable-next-line no-unused-vars
 import ControlPanel from './ControlPanel.js';
 import {CONTROLBUTTONS} from '../Model/ControlButtons.js'; 
 import GameController from '../Controllers/GameController';
@@ -45,11 +43,11 @@ export default class Game extends React.Component {
 
     get_turn_phase() {
         if (this.state.viewGameState.isInSetup) {
-            return "Setup";
+            return "Setup ⚙️";
         } else if (this.state.viewGameState.needsToSelectWorker || this.state.viewGameState.workerNeedsToMove) {
-            return "Worker Movement";
+            return "Worker Movement 🧳";
         } else if (this.state.viewGameState.needsToBuild) {
-            return "Building";
+            return "Building 🔨";
         }
     }
 
