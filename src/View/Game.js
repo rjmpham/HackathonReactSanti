@@ -23,13 +23,13 @@ export default class Game extends React.Component {
             viewGameState: this.controller.gameState
         });
         if(this.state.viewGameState.winner){
-            this.winningJSX = <div className= "winner">Player {this.get_current_player()} wins!!!</div>;
+            this.winningJSX = <div className= "winner">Player {this.get_current_player()} wins!!! <span role='img' aria-label='medal'>🎖️</span></div>;
         } else {
             this.winningJSX = null;
         }
 
         if (this.state.viewGameState.error_message != null) {
-            this.errorJSK = <p><b style={{color: "#b33939"}}>Error:</b> {this.state.viewGameState.error_message}</p>
+            this.errorJSK = <p><b style={{color: "#b33939"}}><span role='img' aria-label='warning'>⚠️</span></b> {this.state.viewGameState.error_message}</p>
             this.controller.gameState.error_message = null;
         } else {
             this.errorJSK = null;

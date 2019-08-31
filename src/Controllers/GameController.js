@@ -98,6 +98,8 @@ export default class GameController {
                 this.gameState.workerNeedsToMove = true;
             }
             return false;
+        } else {
+            this.gameState.error_message = 'Select your worker';
         }
         return true;
     }
@@ -127,6 +129,7 @@ export default class GameController {
 
                 return;   
             } else {
+                this.gameState.error_message = 'Worker can\'t move to that location';
                 this.handleWorkerSelection(position);
                 return;
             }
