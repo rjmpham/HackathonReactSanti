@@ -16,7 +16,7 @@ export default class Square extends React.Component{
 
     handleClick(){
         this.props.onClick(this.props.position); 
-        let tile = this.state.gameState.boardState[this.props.position.x][this.props.position.y]
+        let tile = this.state.gameState.boardState[this.props.position.x][this.props.position.y];
         
         if(tile.topLevel===FLOOR.GROUND){
             this.setState({
@@ -42,13 +42,15 @@ export default class Square extends React.Component{
     }
  
     
-    //props.value is a Vector2 of the board position
     render(){
-    
-        //this.state.gameState.logGameState();
         let tile = this.state.gameState.boardState[this.props.position.x][this.props.position.y];
         let workerIndicator = (tile.worker == null) ? '' : tile.worker.indicator;
-        let is_highlighted = tile.is_highlighted;
+        if (tile.is_highlighted) {
+            this.setState({
+                squareLevel: 'highlightedsquare',
+            })
+        }
+
         return (
             <button 
                 // eslint-disable-next-line quotes

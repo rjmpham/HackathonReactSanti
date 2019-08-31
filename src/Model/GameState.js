@@ -77,17 +77,23 @@ export default class GameState{
     highlightTiles(positions){
         if(this.selectedWorker === null)
             console.error('Selected worker is null');
-        
-        positions.foreach( position => {
-            this.boardState.getTile(position).isHighlighted = true;
-            this.highlightedTiles.push(position);
-        });
+
+        if (positions.length !== 0) {
+            positions.forEach(tile => {
+                this.getTile(tile.position).isHighlighted = true;
+                this.highlightedTiles.push(tile);
+            });
+        }
     }
 
     clearHighlightedTiles(){
-        this.highlightedTiles.forEach(position => {
-            this.boardState.getTile(position).isHighlighted = false;
+        // Clear the state of each tile
+        this.highlightedTiles.forEach(tile => {
+            this.getTile(tile.position).isHighlighted = false;
         });
+
+        // Clear highlited tiles list
+        this.highlightedTiles = [];
     }
 
     setTile(position, tile){

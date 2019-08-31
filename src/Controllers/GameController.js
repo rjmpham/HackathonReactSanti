@@ -45,14 +45,16 @@ export default class GameController {
         this.gameState.activePlayer = (this.gameState.activePlayer === this.player_1) ? this.player_2 : this.player_1;
     }
 
-    // Hightlight the squares around a selected worker to indicate which ones are buildable
-    // Not sure how to get which squares are buildable. Also need to add a method to unhighlight squares once they are selected
-    highlight_builidable_squares(pSosition) {
-        let local_nine = this.gameState.getLocalNine(position);
+    find_buildable_positions(worker_position) {
+        let local_nine = this.gameState.getLocalNine(worker_position);
+        let buildable_positions = [];
         local_nine.forEach(tile => {
-            tile.isHighlighted = true;
-            console.log(tile);
+           if (tile.isBuildable() && tile.position !== worker_position) {
+               buildable_positions.push(tile);
+           }
         });
+
+        return buildable_positions;
     }
 
     //assumes a worker is selected 
@@ -62,7 +64,7 @@ export default class GameController {
         if(this.gameState.activePlayer.verifyMove(selectedWorkerPosition, position)){
             console.log('Moving worker to ' + position.toString());
             this.moveWorker(selectedWorkerPosition, position);
-            if(this.gameState.getTile(position).topLevel===FLOOR.L_THREE){
+            if(this.gameState.getTile(position).topLevel === FLOOR.L_THREE){
                 this.gameState.winner = true;
                 return false;
             }
@@ -100,7 +102,7 @@ export default class GameController {
         return true;
     }
 
-    handleBoardClick(position){
+    handleBoardClick(position) {
         if(this.gameState.winner === true) {
             return;
         }
@@ -118,6 +120,11 @@ export default class GameController {
         if(this.gameState.workerNeedsToMove){
             if (this.gameState.getTile(position).isBuildable()) {
                 this.gameState.workerNeedsToMove = this.handleWorkerMovement(position);
+
+                let buildable_positions = this.find_buildable_positions(position);
+                this.gameState.highlightTiles(buildable_positions);
+                
+
                 return;   
             } else {
                 this.handleWorkerSelection(position);
@@ -126,7 +133,6 @@ export default class GameController {
         }
 
         if (this.gameState.needsToBuild) {
-            this.highlight_builidable_squares(position);
             console.log('Attempting to build at position ' + position);
             let target = this.gameState.getTile(position);
 
@@ -145,6 +151,7 @@ export default class GameController {
                 }
                 
                 if (builtBool) {
+                    this.gameState.clearHighlightedTiles();
                     this.newTurn();
                 } else {
                     this.gameState.error_message = "Build Position is unreachable";
@@ -156,7 +163,6 @@ export default class GameController {
         }
        
     }
-
 
 
     handleSetup(position){

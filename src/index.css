@@ -78,7 +78,7 @@ ol, ul {
   padding: 0;
   text-align: center;
   width: 80px;
-  background-image: url("/Imgs/0.png");
+  background-color: #218c74;
 
 }
 
@@ -141,6 +141,21 @@ ol, ul {
     width: 80px;
     background-image: url("/Imgs/D.png");
   
+  }
+
+  .highlightedsquare{
+    flex:1;
+    align-content: space-around;
+    float: left;
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 20px;
+    height: 80px;
+    padding: 0;
+    text-align: center;
+    width: 80px;
+    background-color: #b33939;
+    box-shadow: 10px 10px 5px #84817a;
   }
 
 
