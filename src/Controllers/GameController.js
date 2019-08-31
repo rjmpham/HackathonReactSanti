@@ -42,11 +42,7 @@ export default class GameController {
         this.gameState.workerNeedsToMove = false;
         this.gameState.needsToSelectWorker = true;
 
-        if (this.gameState.activePlayer === this.player_1) {
-            this.gameState.activePlayer = this.player_2;
-        } else {
-            this.gameState.activePlayer = this.player_1;
-        }
+        this.gameState.activePlayer = (this.gameState.activePlayer === this.player_1) ? this.player_2 : this.player_1;
     }
 
     //assumes a worker is selected 
@@ -67,7 +63,7 @@ export default class GameController {
             return false;
         }
 
-        console.log('Cannot move worker to that location.');
+        this.gameState.error_message = "Can't move worker to that location.";
         return true;
     }
 
@@ -76,7 +72,7 @@ export default class GameController {
         
         //there is no worker on the clicked tile
         if(clickedTile.worker === null){
-            console.log('Selected a tile without a worker.');
+            this.gameState.error_message = 'Selected a tile without a worker';
             return true;
         }
 
@@ -95,9 +91,6 @@ export default class GameController {
     }
 
     handleBoardClick(position){
-        console.log('It is ' + ((this.gameState.activePlayer === this.player_1) ? 'player 1s' : 'player 2s') + ' turn.');
-
-        // If the 
         if(this.gameState.winner === true) {
             return;
         }
@@ -144,11 +137,11 @@ export default class GameController {
                 if (builtBool) {
                     this.newTurn();
                 } else {
-                    console.log('Build Position is unreachable');
+                    this.gameState.error_message = "Build Position is unreachable";
                 }
 
             } else {
-                console.log("Can't build at the position " + position);
+                this.gameState.error_message = "Can't build at that position";
             }
         }
        
@@ -161,7 +154,7 @@ export default class GameController {
 
         //Can't place a worker on top of another.
         if(clickedTile.worker !== null){
-            console.log('Cannot place worker, tile is occupied.');
+            this.gameState.error_message = "Cannot place worker, tile is occupied."
             return true;
         }
          
@@ -180,7 +173,6 @@ export default class GameController {
 
             if(this.player_2.workers.length === 2){
                 this.gameState.needsToSelectWorker = true;
-                console.log('Both players have placed their pieces.');
                 this.gameState.activePlayer=this.player_1;
                 return false;
             }

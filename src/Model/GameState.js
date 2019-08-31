@@ -16,6 +16,8 @@ export default class GameState{
     needsToSelectWorker = false;
     workerNeedsToMove = false;
     needsToBuild = false;
+
+    error_message = null;
     
     constructor(boardSize){
         this.boardState = new Array(boardSize);
