@@ -129,9 +129,13 @@ export default class GameController {
 
                 return;   
             } else {
-                this.gameState.error_message = 'Worker can\'t move to that location';
-                this.handleWorkerSelection(position);
-                return;
+                if (this.handleWorkerSelection(position)) {
+                    this.gameState.error_message = 'Worker can\'t move to that location';
+                    return;
+                } else {
+                    return;
+                }
+
             }
         }
 

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from 'react';
 import Board from './Board.js';
 import ControlPanel from './ControlPanel.js';
@@ -29,7 +30,7 @@ export default class Game extends React.Component {
         }
 
         if (this.state.viewGameState.error_message != null) {
-            this.errorJSK = <p><b style={{color: "#b33939"}}><span role='img' aria-label='warning'>⚠️</span></b> {this.state.viewGameState.error_message}</p>
+            this.errorJSK = <p><b style={{color: '#b33939'}}><span role='img' aria-label='warning'>⚠️</span></b> {this.state.viewGameState.error_message}</p>;
             this.controller.gameState.error_message = null;
         } else {
             this.errorJSK = null;
@@ -38,16 +39,16 @@ export default class Game extends React.Component {
     }
 
     get_current_player() {
-        return this.state.viewGameState.activePlayer.workerID
+        return this.state.viewGameState.activePlayer.workerID;
     }
 
     get_turn_phase() {
         if (this.state.viewGameState.isInSetup) {
-            return "Setup ⚙️";
+            return 'Setup ⚙️';
         } else if (this.state.viewGameState.needsToSelectWorker || this.state.viewGameState.workerNeedsToMove) {
-            return "Worker Movement 🧳";
+            return 'Worker Movement 🧳';
         } else if (this.state.viewGameState.needsToBuild) {
-            return "Building 🔨";
+            return 'Building 🔨';
         }
     }
 
@@ -73,7 +74,7 @@ export default class Game extends React.Component {
         return (
             <>
                 <h1>Santorini in React <span role="img" aria-label="wave">🌊</span></h1>
-                <h4>Created by Erik Biederstadt, Richard Pham, and David ??? </h4>
+                <h4>Created by Erik Biederstadt, Richard Pham, and David </h4>
                 <div className="game">
                     <div className="game-board">
                         <Board 

@@ -48,7 +48,7 @@ export default class Square extends React.Component{
         if (tile.is_highlighted) {
             this.setState({
                 squareLevel: 'highlightedsquare',
-            })
+            });
         }
 
         return (
