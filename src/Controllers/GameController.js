@@ -49,9 +49,9 @@ export default class GameController {
         let local_nine = this.gameState.getLocalNine(worker_position);
         let buildable_positions = [];
         local_nine.forEach(tile => {
-           if (tile.isBuildable() && tile.position !== worker_position) {
-               buildable_positions.push(tile);
-           }
+            if (tile.isBuildable() && tile.position !== worker_position) {
+                buildable_positions.push(tile);
+            }
         });
 
         return buildable_positions;
