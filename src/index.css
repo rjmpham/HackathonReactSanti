@@ -1,7 +1,7 @@
 body {
   font: 14px "Century Gothic", Futura, sans-serif;
   margin: 20px;
-  background-color: #f7f1e3;
+  background: linear-gradient(110deg, #d3b96a 60%, #e6cf6d 60%);
 }
 
 ol, ul {
