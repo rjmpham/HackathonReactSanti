@@ -44,7 +44,7 @@ export default class Square extends React.Component{
     
     render(){
         let tile = this.state.gameState.boardState[this.props.position.x][this.props.position.y];
-        let workerIndicator = (tile.worker == null) ? '' : tile.worker.indicator;
+        let workerIndicator = (tile.worker == null) ? '' : (tile.worker.indicator==1)? '🐺':'🐻';
         if (tile.is_highlighted) {
             this.setState({
                 squareLevel: 'highlightedsquare',

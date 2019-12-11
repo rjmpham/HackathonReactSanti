@@ -1,0 +1,178 @@
+body {
+    font: 14px "Century Gothic", Futura, sans-serif;
+    margin: 20px;
+    background: linear-gradient(110deg, #d3b96a 60%, #e6cf6d 60%);
+  }
+  
+  ol, ul {
+    padding-left: 30px;
+  }
+  
+  .container {
+    text-align: center;
+  }
+  
+  .inner_content {
+    display: inline-block;
+  }
+  
+  .board-row:after {
+    clear: both;
+    content: "";
+    display: table;
+  }
+  
+  .winner {
+      margin-top: 1in;
+      margin-left: 1in;
+      font-size: 30px;
+      font-weight: bold;
+      line-height: 30px;
+  }
+  
+  .winner-panel{
+      flex-direction: column;
+  }
+  .status {
+    margin-bottom: 10px;
+  }
+  
+  .buildSpace{
+      width: 50%;
+      height: 100%;
+      float: left;
+  }
+  
+  .buildRow {
+      margin-top:5%;
+      margin-left:10%;
+      margin-right:0%;
+      margin-bottom:0%;
+  
+      justify-content: space-around;
+      flex-direction: row;
+      height: 30%;
+      width: 100%;
+      text-align: center;
+  }
+  
+  .buildDisplay {
+      float: left;
+      text-align: center;
+  }
+  
+  .playerRow{
+      height: 35%;
+      width: 100%;
+      text-align: center;
+  }
+  
+  .square0 {
+    flex:1;
+    align-content: space-around;
+    float: left;
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 20px;
+    height: 80px;
+    padding: 0;
+    text-align: center;
+    width: 80px;
+    background-color: #008080;
+  
+  }
+  
+  .square1 {
+      flex:1;
+      align-content: space-around;
+      float: left;
+      font-size: 20px;
+      font-weight: bold;
+      line-height: 20px;
+      height: 80px;
+      padding: 0;
+      text-align: center;
+      width: 80px;
+      background-image: url("/Imgs/L1.png");
+    
+    }
+  
+  
+  .square2 {
+      flex:1;
+      align-content: space-around;
+      float: left;
+      font-size: 20px;
+      font-weight: bold;
+      line-height: 20px;
+      height: 80px;
+      padding: 0;
+      text-align: center;
+      width: 80px;
+      background-image: url("/Imgs/L2.png");
+    
+  }
+  
+  .square3 {
+      flex:1;
+      align-content: space-around;
+      float: left;
+      font-size: 20px;
+      font-weight: bold;
+      line-height: 20px;
+      height: 80px;
+      padding: 0;
+      text-align: center;
+      width: 80px;
+      background-image: url("/Imgs/L3.png");
+    
+    }
+  
+  .square4{
+      flex:1;
+      align-content: space-around;
+      float: left;
+      font-size: 20px;
+      font-weight: bold;
+      line-height: 20px;
+      height: 80px;
+      padding: 0;
+      text-align: center;
+      width: 80px;
+      background-image: url("/Imgs/D.png");
+    
+    }
+  
+    .highlightedsquare{
+      flex:1;
+      align-content: space-around;
+      float: left;
+      font-size: 20px;
+      font-weight: bold;
+      line-height: 20px;
+      height: 80px;
+      padding: 0;
+      text-align: center;
+      width: 80px;
+      background-color: #b33939;
+      box-shadow: 10px 10px 5px #84817a;
+    }
+  
+  
+  .square:focus {
+    outline: none;
+  }
+  
+  .kbd-navigation .square:focus {
+    background: #ddd;
+  }
+  
+  .game {
+    display: flex;
+    flex-direction: row;
+    padding: 10px 0;
+  }
+  
+  .control-panel {
+    margin-left: 20px;
+  }

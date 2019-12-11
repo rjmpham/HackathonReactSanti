@@ -161,7 +161,7 @@ export default class GameController {
                     this.gameState.clearHighlightedTiles();
                     this.newTurn();
                 } else {
-                    this.gameState.error_message = "Build Position is unreachable";
+                    this.gameState.error_message = 'Build Position is unreachable';
                 }
 
             } else {
@@ -177,7 +177,7 @@ export default class GameController {
 
         //Can't place a worker on top of another.
         if(clickedTile.worker !== null){
-            this.gameState.error_message = "Cannot place worker, tile is occupied."
+            this.gameState.error_message = 'Cannot place worker, tile is occupied.';
             return true;
         }
          
