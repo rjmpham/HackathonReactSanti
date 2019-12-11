@@ -1,5 +1,5 @@
 {
-  "name": "santi",
+  "name": "peronalweb",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -33,5 +33,17 @@
   "devDependencies": {
     "eslint": "^6.1.0",
     "gh-pages": "^2.1.1"
-  }
+  },
+  "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rjmpham/personalweb.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rjmpham/personalweb/issues"
+  },
+  "homepage": "https://github.com/rjmpham/personalweb#readme"
 }
