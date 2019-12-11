@@ -93,7 +93,7 @@ body {
       padding: 0;
       text-align: center;
       width: 80px;
-      background-image: url("/Imgs/L1.png");
+      background-image: url("./Imgs/L1.png");
     
     }
   
@@ -109,7 +109,7 @@ body {
       padding: 0;
       text-align: center;
       width: 80px;
-      background-image: url("/Imgs/L2.png");
+      background-image: url("./Imgs/L2.png");
     
   }
   
@@ -124,7 +124,7 @@ body {
       padding: 0;
       text-align: center;
       width: 80px;
-      background-image: url("/Imgs/L3.png");
+      background-image: url("./Imgs/L3.png");
     
     }
   
@@ -139,10 +139,9 @@ body {
       padding: 0;
       text-align: center;
       width: 80px;
-      background-image: url("/Imgs/D.png");
+      background-image: url("./Imgs/D.png");
     
     }
-  
     .highlightedsquare{
       flex:1;
       align-content: space-around;
